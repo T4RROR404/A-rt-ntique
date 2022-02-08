@@ -8,7 +8,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileView" customModule="Navigation" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileView" customModule="Navigation" customModuleProvider="target">
+            <connections>
+                <outlet property="dateLabel" destination="VEV-Dx-edd" id="lB5-hd-vpM"/>
+                <outlet property="nameLabel" destination="gjb-ex-kd4" id="Rrv-iQ-gK0"/>
+                <outlet property="placeLabel" destination="zft-dx-dnU" id="M86-hN-trE"/>
+                <outlet property="portraitView" destination="YoH-HF-x8Y" id="IDP-qw-Bgf"/>
+                <outlet property="textView" destination="7RW-Zy-kSj" id="nep-Z7-bdU"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>

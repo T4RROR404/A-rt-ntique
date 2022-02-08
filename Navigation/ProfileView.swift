@@ -8,6 +8,12 @@
 import UIKit
 
 class ProfileView: UIView {
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var placeLabel: UILabel!
+    @IBOutlet weak var portraitView: UIImageView!
+    @IBOutlet weak var textView: UITextView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()

@@ -15,6 +15,8 @@
 		3E3C08A727B2D66900553696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E3C08A527B2D66900553696 /* LaunchScreen.storyboard */; };
 		3E3C08AF27B2D74B00553696 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3C08AE27B2D74B00553696 /* ProfileView.xib */; };
 		3E3C08B127B2D78600553696 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C08B027B2D78600553696 /* ProfileView.swift */; };
+		3E3C08B527B2DC9000553696 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C08B427B2DC9000553696 /* ProfileViewController.swift */; };
+		3E3C08B727B2DCB300553696 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E3C08B627B2DCB300553696 /* Profile.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		3E3C08A827B2D66900553696 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E3C08AE27B2D74B00553696 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		3E3C08B027B2D78600553696 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3E3C08B427B2DC9000553696 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3E3C08B627B2DCB300553696 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +71,10 @@
 				3E3C08A327B2D66900553696 /* Assets.xcassets */,
 				3E3C08A527B2D66900553696 /* LaunchScreen.storyboard */,
 				3E3C08A827B2D66900553696 /* Info.plist */,
-				3E3C08AE27B2D74B00553696 /* ProfileView.xib */,
+				3E3C08B427B2DC9000553696 /* ProfileViewController.swift */,
 				3E3C08B027B2D78600553696 /* ProfileView.swift */,
+				3E3C08AE27B2D74B00553696 /* ProfileView.xib */,
+				3E3C08B627B2DCB300553696 /* Profile.storyboard */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -133,6 +139,7 @@
 			files = (
 				3E3C08AF27B2D74B00553696 /* ProfileView.xib in Resources */,
 				3E3C08A727B2D66900553696 /* LaunchScreen.storyboard in Resources */,
+				3E3C08B727B2DCB300553696 /* Profile.storyboard in Resources */,
 				3E3C08A427B2D66900553696 /* Assets.xcassets in Resources */,
 				3E3C08A227B2D66900553696 /* Main.storyboard in Resources */,
 			);
@@ -147,6 +154,7 @@
 			files = (
 				3E3C08B127B2D78600553696 /* ProfileView.swift in Sources */,
 				3E3C089F27B2D66900553696 /* ViewController.swift in Sources */,
+				3E3C08B527B2DC9000553696 /* ProfileViewController.swift in Sources */,
 				3E3C089B27B2D66900553696 /* AppDelegate.swift in Sources */,
 				3E3C089D27B2D66900553696 /* SceneDelegate.swift in Sources */,
 			);
