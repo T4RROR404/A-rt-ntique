@@ -23,8 +23,10 @@ class InfoViewController: UIViewController {
     }
     @objc func alertClicked() {
         let alert = UIAlertController(title: "Attention", message: "Message", preferredStyle: .alert)
-        let okBtn = UIAlertAction(title: "yep", style: .cancel, handler: nil)
+        let okBtn = UIAlertAction(title: "yep", style: .default, handler: nil)
+        let noBtn = UIAlertAction(title: "no", style: .destructive, handler: nil)
         alert.addAction(okBtn)
+        alert.addAction(noBtn)
         present(alert, animated: true, completion: nil)
         print("alert work")
     }
