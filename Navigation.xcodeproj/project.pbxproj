@@ -15,6 +15,7 @@
 		3EA804F627B6DB2300549187 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804F527B6DB2300549187 /* FeedViewController.swift */; };
 		3EA804F827B6DB3500549187 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804F727B6DB3500549187 /* ProfileViewController.swift */; };
 		3EA804FA27B82E6900549187 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804F927B82E6900549187 /* PostViewController.swift */; };
+		3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804FD27B855FC00549187 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3EA804F527B6DB2300549187 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		3EA804F727B6DB3500549187 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3EA804F927B82E6900549187 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		3EA804FD27B855FC00549187 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				3EA804F527B6DB2300549187 /* FeedViewController.swift */,
 				3EA804F727B6DB3500549187 /* ProfileViewController.swift */,
 				3EA804F927B82E6900549187 /* PostViewController.swift */,
+				3EA804FD27B855FC00549187 /* InfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				3EA804FA27B82E6900549187 /* PostViewController.swift in Sources */,
 				3E3C089F27B2D66900553696 /* MainTabBarController.swift in Sources */,
 				3E3C089B27B2D66900553696 /* AppDelegate.swift in Sources */,
+				3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */,
 				3EA804F827B6DB3500549187 /* ProfileViewController.swift in Sources */,
 				3EA804F627B6DB2300549187 /* FeedViewController.swift in Sources */,
 				3E3C089D27B2D66900553696 /* SceneDelegate.swift in Sources */,
