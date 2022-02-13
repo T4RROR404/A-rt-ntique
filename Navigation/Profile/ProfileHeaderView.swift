@@ -29,12 +29,5 @@ class ProfileHeaderView: UIView {
         name.text = "K1LL B1LL"
         name.font = .systemFont(ofSize: 30, weight: .bold)
         self.addSubview(name)
-        
-        let showButton = UIButton(frame: CGRect(x: 55, y: 410, width: 300, height: 60))
-        showButton.setTitle("Show Status", for: .normal)
-        showButton.backgroundColor = .systemBlue
-        showButton.layer.cornerRadius = 15
-        self.addSubview(showButton)
-
     }
 }

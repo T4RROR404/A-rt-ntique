@@ -15,7 +15,17 @@ class ProfileViewController: UIViewController {
         title = "Profile"
         let profileHeaderView = ProfileHeaderView()
         view.addSubview(profileHeaderView)
-        let textField = UITextField(frame: CGRect(x: 195, y: 280, width: 190, height: 50))
+        setupView()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        let profileView = ProfileHeaderView()
+        profileView.frame = self.view.frame
+    }
+    public let textField = UITextField(frame: CGRect(x: 195, y: 280, width: 190, height: 50))
+    let showButton = UIButton(frame: CGRect(x: 55, y: 410, width: 300, height: 60))
+
+    private func setupView() {
         textField.placeholder = "Waiting with something..."
         textField.returnKeyType = .done
         textField.autocapitalizationType = .words
@@ -27,10 +37,21 @@ class ProfileViewController: UIViewController {
         textField.keyboardType = .default
         textField.clearButtonMode = .always
         view.addSubview(textField)
+
+        showButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        showButton.setTitle("Show Status", for: .normal)
+        showButton.backgroundColor = .systemBlue
+        showButton.layer.cornerRadius = 7
+        showButton.layer.shadowColor = UIColor.black.cgColor
+        showButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        showButton.layer.shadowRadius = 5
+        showButton.layer.shadowOpacity = 0.3
+        view.addSubview(showButton)
     }
-    override func viewWillLayoutSubviews() {
-        let profileView = ProfileHeaderView()
-        profileView.frame = self.view.frame
-        
+
+    @objc func buttonPressed() {
+        let txtField:String = textField.text!
+        print(txtField)
     }
 }
+
