@@ -26,8 +26,5 @@ class InfoViewController: UIViewController {
         let okBtn = UIAlertAction(title: "yep", style: .cancel, handler: nil)
         alert.addAction(okBtn)
         present(alert, animated: true, completion: nil)
-        
-//        let postViewController = PostViewController()
-//        navigationController?.pushViewController(postViewController, animated: true)
     }
 }

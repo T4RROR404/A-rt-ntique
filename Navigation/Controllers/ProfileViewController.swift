@@ -14,5 +14,4 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemGray5
         title = "Profile"
     }
-
 }
