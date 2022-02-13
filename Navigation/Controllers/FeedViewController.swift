@@ -18,7 +18,13 @@ class FeedViewController: UIViewController {
         button.setTitle("open", for: .normal)
         button.backgroundColor = .systemGray2
         button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 90).isActive = true
+        button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -90).isActive = true
+        button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
     }
     
     @objc func buttonClicked() {

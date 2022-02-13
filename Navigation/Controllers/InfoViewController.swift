@@ -19,6 +19,11 @@ class InfoViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(alertClicked), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 90).isActive = true
+        button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -90).isActive = true
+        button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
     }
     @objc func alertClicked() {
