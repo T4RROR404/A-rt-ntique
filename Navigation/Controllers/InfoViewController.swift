@@ -26,5 +26,6 @@ class InfoViewController: UIViewController {
         let okBtn = UIAlertAction(title: "yep", style: .cancel, handler: nil)
         alert.addAction(okBtn)
         present(alert, animated: true, completion: nil)
+        print("alert work")
     }
 }
