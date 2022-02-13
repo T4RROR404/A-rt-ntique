@@ -17,7 +17,8 @@ class PostViewController: UIViewController {
         titleLabel.text = myPost.title
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
-        let infoButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(buttonInfoClicked))
+        let infoImage = UIImage(named: "info")
+        let infoButton = UIBarButtonItem(image: infoImage , style: .done, target: self, action: #selector(buttonInfoClicked))
         navigationItem.rightBarButtonItem = infoButton
     }
     
