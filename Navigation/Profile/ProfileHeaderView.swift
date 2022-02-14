@@ -25,9 +25,9 @@ class ProfileHeaderView: UIView {
         profileImageView.frame = CGRect(x: 35, y: 150, width: 150, height: 230)
         self.addSubview(profileImageView)
         
-        let name = UILabel(frame: CGRect(x: 220, y: 170, width: 200, height: 80))
+        let name = UILabel(frame: CGRect(x: 215, y: 170, width: 200, height: 80))
         name.text = "K1LL B1LL"
         name.font = .systemFont(ofSize: 30, weight: .bold)
         self.addSubview(name)
-    }
+    }   
 }
