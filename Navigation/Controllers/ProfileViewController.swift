@@ -69,10 +69,16 @@ class ProfileViewController: UIViewController {
     @objc func buttonPressed() {
         status.text = textField.text
         status.textColor = .black
-        UIView.animate(withDuration: 2.0) {
+        textField.text = ""
+        UIView.animate(withDuration: 1.0) {
             self.showButton.center = self.view.center
             self.textField.alpha = 1
             self.view.endEditing(true)
+            if self.status.hasText {
+                self.showButton.setTitle("Change Status", for: .normal)
+                self.textField.alpha = 0
+                self.showButton.frame = CGRect(x: 55, y: 400, width: 300, height: 60)
+            }
         }
     }
 }
