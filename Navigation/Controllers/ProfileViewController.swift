@@ -24,6 +24,7 @@ class ProfileViewController: UIViewController {
         let profileView = ProfileHeaderView()
         profileView.frame = self.view.frame
     }
+    
     let textField = UITextField(frame: CGRect(x: 200, y: 360, width: 190, height: 50))
     let showButton = UIButton(frame: CGRect(x: 55, y: 400, width: 300, height: 60))
     let status = UITextView(frame: CGRect(x: 200, y: 290, width: 190, height: 50))
@@ -39,10 +40,8 @@ class ProfileViewController: UIViewController {
         textField.returnKeyType = .next
         textField.keyboardType = .default
         textField.clearButtonMode = .always
-        view.addSubview(textField)
-        textField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 35).isActive = true
-        textField.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         textField.alpha = 0
+        view.addSubview(textField)
 
         showButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         showButton.setTitle("Create Status", for: .normal)
@@ -53,8 +52,6 @@ class ProfileViewController: UIViewController {
         showButton.layer.shadowRadius = 5
         showButton.layer.shadowOpacity = 0.3
         view.addSubview(showButton)
-        showButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        showButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
         
         status.backgroundColor = .systemGray2
@@ -62,8 +59,6 @@ class ProfileViewController: UIViewController {
         status.textColor = .systemGray
         status.text = "status"
         view.addSubview(status)
-        status.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 35).isActive = true
-        status.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     }
 
     @objc func buttonPressed() {
@@ -71,7 +66,7 @@ class ProfileViewController: UIViewController {
         status.textColor = .black
         textField.text = ""
         UIView.animate(withDuration: 1.0) {
-            self.showButton.center = self.view.center
+            self.showButton.frame = CGRect(x: 55, y: 428, width: 300, height: 60)
             self.textField.alpha = 1
             self.view.endEditing(true)
             if self.status.hasText {
