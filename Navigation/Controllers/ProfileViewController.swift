@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
         let profileHeaderView = ProfileHeaderView()
         view.addSubview(profileHeaderView)
         setupView()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
         view.addGestureRecognizer(tap)
     }
     
@@ -39,6 +39,7 @@ class ProfileViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.returnKeyType = .next
         textField.keyboardType = .default
+        
         textField.clearButtonMode = .always
         textField.alpha = 0
         view.addSubview(textField)
@@ -75,6 +76,9 @@ class ProfileViewController: UIViewController {
                 self.showButton.frame = CGRect(x: 55, y: 400, width: 300, height: 60)
             }
         }
+    }
+    @objc func tap(_ sender: Any) {
+        textField.resignFirstResponder()
     }
 }
 
