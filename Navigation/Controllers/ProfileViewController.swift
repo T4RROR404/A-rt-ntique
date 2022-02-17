@@ -39,7 +39,6 @@ class ProfileViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.returnKeyType = .next
         textField.keyboardType = .default
-        
         textField.clearButtonMode = .always
         textField.alpha = 0
         view.addSubview(textField)
