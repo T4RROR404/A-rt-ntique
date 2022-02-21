@@ -20,23 +20,27 @@ class ProfileHeaderView: UIView {
         super.init(coder: coder)
     }
     
-    let textField = UITextField(frame: CGRect(x: 200, y: 360, width: 190, height: 50))
-    let showButton = UIButton(frame: CGRect(x: 55, y: 400, width: 300, height: 60))
-    let status = UITextView(frame: CGRect(x: 200, y: 290, width: 190, height: 50))
+    let textField = UITextField(frame: CGRect(x: 200, y: 290, width: 160, height: 50))
+    let showButton = UIButton(frame: CGRect(x: 200, y: 290, width: 160, height: 50))
+    let status = UITextView(frame: CGRect(x: 200, y: 210, width: 160, height: 50))
     
     private func setupView() {
         
         let profileImage = UIImage(named: "portrait")
         let profileImageView = UIImageView(image: profileImage)
-        profileImageView.frame = CGRect(x: 35, y: 150, width: 150, height: 230)
+        profileImageView.frame = CGRect(x: 35, y: 120, width: 150, height: 230)
         self.addSubview(profileImageView)
 
-        let name = UILabel(frame: CGRect(x: 215, y: 190, width: 200, height: 80))
+        let name = UILabel(frame: CGRect(x: 200, y: 120, width: 200, height: 80))
         name.text = "K1LL B1LL"
         name.font = .systemFont(ofSize: 35, weight: .bold)
+        name.adjustsFontSizeToFitWidth = true
+        name.minimumScaleFactor = 0.5
         self.addSubview(name)
 
         textField.placeholder = "Waiting with something..."
+        textField.adjustsFontSizeToFitWidth = true
+        textField.minimumFontSize = 0.5
         textField.returnKeyType = .done
         textField.autocapitalizationType = .words
         textField.font = .systemFont(ofSize: 15)
@@ -71,13 +75,13 @@ class ProfileHeaderView: UIView {
         status.textColor = .black
         textField.text = ""
         UIView.animate(withDuration: 1.0) {
-            self.showButton.frame = CGRect(x: 55, y: 428, width: 300, height: 60)
+            self.showButton.frame = CGRect(x: 200, y: 370, width: 160, height: 50)
             self.textField.alpha = 1
             self.endEditing(true)
             if self.status.hasText {
                 self.showButton.setTitle("Change Status", for: .normal)
                 self.textField.alpha = 0
-                self.showButton.frame = CGRect(x: 55, y: 400, width: 300, height: 60)
+                self.showButton.frame = CGRect(x: 200, y: 290, width: 160, height: 50)
             }
         }
     }
