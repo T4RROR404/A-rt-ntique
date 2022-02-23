@@ -13,15 +13,16 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray
         setupTabBar()
+        
     }
     
     func setupTabBar() {
         
         let feedViewController = createNavController(vc: FeedViewController(), itemName: "Feed", ItemImage: "arrow.up.arrow.down")
         
-        let profileViewController = createNavController(vc: ProfileViewController(), itemName: "Profile", ItemImage: "person.crop.rectangle")
+        let loginViewController = createNavController(vc: LoginViewController(), itemName: "Profile", ItemImage: "person.crop.rectangle")
 
-        viewControllers = [feedViewController, profileViewController]
+        viewControllers = [feedViewController, loginViewController]
         
     }
     
@@ -33,6 +34,9 @@ class MainTabBarController: UITabBarController {
         
         let navController = UINavigationController(rootViewController: vc)
         navController.tabBarItem = item
+        
+
+    
         
         return navController
     }
