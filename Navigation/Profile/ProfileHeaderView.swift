@@ -73,6 +73,15 @@ class ProfileHeaderView: UIView {
         showButton.translatesAutoresizingMaskIntoConstraints = false
         return showButton
     }()
+    
+    private lazy var newButton: UIButton = {
+        let newButton = UIButton()
+        newButton.setTitle("edit profile", for: .normal)
+        newButton.backgroundColor = .gray
+        newButton.layer.cornerRadius = 7
+        newButton.translatesAutoresizingMaskIntoConstraints = false
+        return newButton
+    }()
 
     let avatarImage: UIImageView = {
         let portrait = UIImage(named: "portrait")
@@ -116,6 +125,7 @@ class ProfileHeaderView: UIView {
         self.addSubview(avatarImage)
         self.addSubview(textField)
         self.addSubview(showButton)
+        self.addSubview(newButton)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
 
@@ -142,6 +152,13 @@ class ProfileHeaderView: UIView {
         constraints.append(showButton.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
         constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
         constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
+        
+        
+        constraints.append(newButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 130))
+        constraints.append(newButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -130))
+        constraints.append(newButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
+
+        
     
         NSLayoutConstraint.activate(constraints)
     }
