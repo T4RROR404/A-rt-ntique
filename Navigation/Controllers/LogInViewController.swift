@@ -102,12 +102,15 @@ class LoginViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
             let bottomSpace = view.frame.height - (loginButton.frame.origin.y + loginButton.frame.height)
-            view.frame.origin.y -= keyboardHeight - bottomSpace + 30
+            fieldStackView.frame.origin.y -= keyboardHeight - bottomSpace + 30
+            loginButton.frame.origin.y -= keyboardHeight - bottomSpace + 30
         }
     }
     
     @objc private func keyboardWillHide() {
-        view.frame.origin.y = 0
+
+        fieldStackView.frame.origin.y = 480
+        loginButton.frame.origin.y = 590
     }
     
     deinit {
@@ -127,14 +130,14 @@ class LoginViewController: UIViewController {
         var constraints = [NSLayoutConstraint]()
         
         constraints.append(fieldStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
-        constraints.append(fieldStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor))
+        constraints.append(fieldStackView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 140))
         constraints.append(fieldStackView.heightAnchor.constraint(equalToConstant: 90))
         constraints.append(fieldStackView.widthAnchor.constraint(equalToConstant: 250))
         
         constraints.append(logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor))
-        constraints.append(logoImage.widthAnchor.constraint(equalToConstant: 210))
-        constraints.append(logoImage.heightAnchor.constraint(equalToConstant: 210))
-        constraints.append(logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10))
+        constraints.append(logoImage.widthAnchor.constraint(equalToConstant: 230))
+        constraints.append(logoImage.heightAnchor.constraint(equalToConstant: 230))
+        constraints.append(logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20))
         
         constraints.append(loginButton.topAnchor.constraint(equalTo: fieldStackView.bottomAnchor, constant: 30))
         constraints.append(loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor))
