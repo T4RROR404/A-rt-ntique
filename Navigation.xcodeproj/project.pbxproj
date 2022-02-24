@@ -18,6 +18,7 @@
 		3EA804FA27B82E6900549187 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804F927B82E6900549187 /* PostViewController.swift */; };
 		3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804FD27B855FC00549187 /* InfoViewController.swift */; };
 		3ED8518D27C6A65B000344B7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518C27C6A65B000344B7 /* LogInViewController.swift */; };
+		3ED8519027C75EB5000344B7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		3EA804F927B82E6900549187 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		3EA804FD27B855FC00549187 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3ED8518C27C6A65B000344B7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +52,6 @@
 		3E2A04AC27B9641E00EBAF25 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				3ED8518C27C6A65B000344B7 /* LogInViewController.swift */,
 				3E2A04AD27B9643D00EBAF25 /* ProfileHeaderView.swift */,
 			);
 			path = Profile;
@@ -78,6 +79,7 @@
 				3E2A04AC27B9641E00EBAF25 /* Profile */,
 				3EA804F227B6D2F800549187 /* Application */,
 				3EA804F327B6D31E00549187 /* Controllers */,
+				3ED8518E27C75E36000344B7 /* Extention */,
 				3EA804F427B6D36E00549187 /* Resources */,
 			);
 			path = Navigation;
@@ -100,6 +102,7 @@
 				3EA804F927B82E6900549187 /* PostViewController.swift */,
 				3EA804FD27B855FC00549187 /* InfoViewController.swift */,
 				3EA804F727B6DB3500549187 /* ProfileViewController.swift */,
+				3ED8518C27C6A65B000344B7 /* LogInViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -112,6 +115,14 @@
 				3E3C08A827B2D66900553696 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3ED8518E27C75E36000344B7 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */,
+			);
+			path = Extention;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 				3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */,
 				3EA804F827B6DB3500549187 /* ProfileViewController.swift in Sources */,
 				3EA804F627B6DB2300549187 /* FeedViewController.swift in Sources */,
+				3ED8519027C75EB5000344B7 /* UIColor+extension.swift in Sources */,
 				3E3C089D27B2D66900553696 /* SceneDelegate.swift in Sources */,
 				3E2A04AE27B9643D00EBAF25 /* ProfileHeaderView.swift in Sources */,
 			);

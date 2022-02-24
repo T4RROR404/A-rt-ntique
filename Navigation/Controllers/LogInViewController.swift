@@ -13,10 +13,9 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         addConstraint()
-        self.tabBarController?.tabBar.isHidden = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-        view.addGestureRecognizer(tap)
-        
+        initalSetup()
+//        self.tabBarController?.tabBar.isHidden = true
+
     }
     
     private lazy var loginField: UITextField = {
@@ -27,8 +26,8 @@ class LoginViewController: UIViewController {
         loginField.returnKeyType = .done
         loginField.autocapitalizationType = .words
         loginField.font = .systemFont(ofSize: 15)
-        loginField.textColor = .systemGray2
-        loginField.backgroundColor = .systemGray6
+        loginField.textColor = .black
+        loginField.backgroundColor = .systemGray5
         loginField.borderStyle = .roundedRect
         loginField.returnKeyType = .next
         loginField.keyboardType = .default
@@ -45,12 +44,13 @@ class LoginViewController: UIViewController {
         passwordField.returnKeyType = .done
         passwordField.autocapitalizationType = .words
         passwordField.font = .systemFont(ofSize: 15)
-        passwordField.textColor = .systemGray2
-        passwordField.backgroundColor = .systemGray6
+        passwordField.textColor = .black
+        passwordField.backgroundColor = .systemGray5
         passwordField.borderStyle = .roundedRect
         passwordField.returnKeyType = .next
         passwordField.keyboardType = .default
         passwordField.clearButtonMode = .always
+        passwordField.isSecureTextEntry = true
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         return passwordField
     } ()
@@ -86,15 +86,40 @@ class LoginViewController: UIViewController {
         return fieldStackView
     }()
     
-    @objc func tap(_ sender: Any) {
-        loginField.resignFirstResponder()
-        passwordField.resignFirstResponder()
+    private func initalSetup() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            let bottomSpace = view.frame.height - (loginButton.frame.origin.y + loginButton.frame.height)
+            view.frame.origin.y -= keyboardHeight - bottomSpace + 30
+        }
+    }
+    
+    @objc private func keyboardWillHide() {
+        view.frame.origin.y = 0
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     private func addConstraint() {
         
         view.addSubview(fieldStackView)
         view.addSubview(logoImage)
+        view.addSubview(fieldStackView)
         view.addSubview(loginButton)
         fieldStackView.addArrangedSubview(loginField)
         fieldStackView.addArrangedSubview(passwordField)
@@ -116,11 +141,6 @@ class LoginViewController: UIViewController {
         constraints.append(loginButton.widthAnchor.constraint(equalToConstant: 150))
         constraints.append(loginButton.heightAnchor.constraint(equalToConstant: 50))
         
- 
-        
         NSLayoutConstraint.activate(constraints)
-        
-        
     }
-    
 }
