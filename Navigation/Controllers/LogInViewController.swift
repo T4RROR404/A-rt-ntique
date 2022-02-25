@@ -122,7 +122,7 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue)?.cgRectValue {
                 self.scrollFieldView.contentInset.bottom = kbdSize.height
-                let kbdSizeMoove = kbdSize.height 
+                let kbdSizeMoove = kbdSize.height
                 self.scrollFieldView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0, bottom: kbdSizeMoove, right: 0)
             }
         }
@@ -148,13 +148,13 @@ class LoginViewController: UIViewController {
 
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(scrollFieldView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 0))
+        constraints.append(scrollFieldView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: -12))
         constraints.append(scrollFieldView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
         constraints.append(scrollFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor))
         constraints.append(scrollFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor))
         constraints.append(scrollFieldView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
-        constraints.append(fieldStackView.topAnchor.constraint(equalTo: scrollFieldView.topAnchor, constant: 90))
+        constraints.append(fieldStackView.topAnchor.constraint(equalTo: scrollFieldView.topAnchor, constant: 110))
         constraints.append(fieldStackView.centerXAnchor.constraint(equalTo: scrollFieldView.centerXAnchor))
         let leadingStackConstraint = fieldStackView.leadingAnchor.constraint(equalTo: scrollFieldView.leadingAnchor)
         let trailingStackConstraint = fieldStackView.trailingAnchor.constraint(equalTo: scrollFieldView.trailingAnchor)
