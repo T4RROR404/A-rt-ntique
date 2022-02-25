@@ -13,12 +13,27 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         addConstraint()
-        initalSetup()
 //        self.tabBarController?.tabBar.isHidden = true
 
     }
     
-    private lazy var loginField: UITextField = {
+    private let scrollFieldView: UIScrollView = {
+        let scrollFieldView = UIScrollView()
+        scrollFieldView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollFieldView
+    } ()
+    
+    private let singLabel: UILabel = {
+        let singLabel = UILabel()
+        singLabel.text = "Sing in to A(rt)ntique"
+        singLabel.textColor = .systemGray2
+        singLabel.font = .systemFont(ofSize: 15, weight: .light)
+        singLabel.adjustsFontSizeToFitWidth = true
+        singLabel.minimumScaleFactor = 0.5
+        return singLabel
+    } ()
+    
+    lazy var loginField: UITextField = {
         let loginField = UITextField()
         loginField.placeholder = "Enter login..."
         loginField.adjustsFontSizeToFitWidth = true
@@ -36,7 +51,7 @@ class LoginViewController: UIViewController {
         return loginField
     } ()
     
-    private lazy var passwordField: UITextField = {
+     lazy var passwordField: UITextField = {
         let passwordField = UITextField()
         passwordField.placeholder = "Enter password..."
         passwordField.adjustsFontSizeToFitWidth = true
@@ -47,7 +62,7 @@ class LoginViewController: UIViewController {
         passwordField.textColor = .black
         passwordField.backgroundColor = .systemGray5
         passwordField.borderStyle = .roundedRect
-        passwordField.returnKeyType = .next
+        passwordField.returnKeyType = .default
         passwordField.keyboardType = .default
         passwordField.clearButtonMode = .always
         passwordField.isSecureTextEntry = true
@@ -86,64 +101,85 @@ class LoginViewController: UIViewController {
         return fieldStackView
     }()
     
-    private func initalSetup() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(kbdHide))
         view.addGestureRecognizer(tap)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func hideKeyboard() {
-        view.endEditing(true)
-    }
-    
-    @objc private func keyboardWillShow(notification: NSNotification) {
+        NotificationCenter.default.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height
-            let bottomSpace = view.frame.height - (loginButton.frame.origin.y + loginButton.frame.height)
-            fieldStackView.frame.origin.y -= keyboardHeight - bottomSpace + 30
-            loginButton.frame.origin.y -= keyboardHeight - bottomSpace + 30
+        loginField.delegate = self
+        passwordField.delegate = self
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func kbdShow(_ notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue)?.cgRectValue {
+                self.scrollFieldView.contentInset.bottom = kbdSize.height
+                let kbdSizeMoove = kbdSize.height + 60
+                self.scrollFieldView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0, bottom: kbdSizeMoove, right: 0)
+            }
         }
     }
     
-    @objc private func keyboardWillHide() {
-
-        fieldStackView.frame.origin.y = 480
-        loginButton.frame.origin.y = 590
+    @objc private func kbdHide(_ notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.scrollFieldView.contentInset.bottom = .zero
+            self.scrollFieldView.verticalScrollIndicatorInsets = .zero
+            self.view.endEditing(true)
+        }
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
     private func addConstraint() {
         
-        view.addSubview(fieldStackView)
+        view.addSubview(scrollFieldView)
         view.addSubview(logoImage)
-        view.addSubview(fieldStackView)
-        view.addSubview(loginButton)
+        scrollFieldView.addSubview(fieldStackView)
+        scrollFieldView.addSubview(loginButton)
+        fieldStackView.addArrangedSubview(singLabel)
         fieldStackView.addArrangedSubview(loginField)
         fieldStackView.addArrangedSubview(passwordField)
-        
+
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(fieldStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
-        constraints.append(fieldStackView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 140))
-        constraints.append(fieldStackView.heightAnchor.constraint(equalToConstant: 90))
-        constraints.append(fieldStackView.widthAnchor.constraint(equalToConstant: 250))
+        constraints.append(scrollFieldView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 0))
+        constraints.append(scrollFieldView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(scrollFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor))
+        constraints.append(scrollFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor))
         
-        constraints.append(logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor))
+        constraints.append(fieldStackView.topAnchor.constraint(equalTo: scrollFieldView.topAnchor, constant: 90))
+
+        constraints.append(fieldStackView.leadingAnchor.constraint(equalTo: scrollFieldView.leadingAnchor, constant: 95))
+        constraints.append(fieldStackView.trailingAnchor.constraint(equalTo: scrollFieldView.trailingAnchor))
+        
+        constraints.append(logoImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor))
         constraints.append(logoImage.widthAnchor.constraint(equalToConstant: 230))
         constraints.append(logoImage.heightAnchor.constraint(equalToConstant: 230))
-        constraints.append(logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20))
+        constraints.append(logoImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20))
         
-        constraints.append(loginButton.topAnchor.constraint(equalTo: fieldStackView.bottomAnchor, constant: 30))
-        constraints.append(loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor))
+        constraints.append(loginButton.topAnchor.constraint(equalTo: self.fieldStackView.bottomAnchor, constant: 30))
+        constraints.append(loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor))
         constraints.append(loginButton.widthAnchor.constraint(equalToConstant: 150))
         constraints.append(loginButton.heightAnchor.constraint(equalToConstant: 50))
         
         NSLayoutConstraint.activate(constraints)
+        
+        for view in fieldStackView.arrangedSubviews {
+            NSLayoutConstraint.activate([
+                view.widthAnchor.constraint(equalToConstant: 200),
+                view.heightAnchor.constraint(equalToConstant: 40)
+            ])
+        }
+    }
+}
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        passwordField.becomeFirstResponder()
     }
 }
