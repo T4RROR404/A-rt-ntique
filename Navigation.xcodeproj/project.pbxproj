@@ -19,6 +19,8 @@
 		3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804FD27B855FC00549187 /* InfoViewController.swift */; };
 		3ED8518D27C6A65B000344B7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518C27C6A65B000344B7 /* LogInViewController.swift */; };
 		3ED8519027C75EB5000344B7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */; };
+		3ED8519827CA5233000344B7 /* UIView+extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8519727CA5233000344B7 /* UIView+extention.swift */; };
+		3ED8519A27CB74EF000344B7 /* UIImage+extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8519927CB74EF000344B7 /* UIImage+extention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		3EA804FD27B855FC00549187 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3ED8518C27C6A65B000344B7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		3ED8519727CA5233000344B7 /* UIView+extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extention.swift"; sourceTree = "<group>"; };
+		3ED8519927CB74EF000344B7 /* UIImage+extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extention.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */,
+				3ED8519727CA5233000344B7 /* UIView+extention.swift */,
+				3ED8519927CB74EF000344B7 /* UIImage+extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -195,11 +201,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ED8519A27CB74EF000344B7 /* UIImage+extention.swift in Sources */,
 				3EA804FA27B82E6900549187 /* PostViewController.swift in Sources */,
 				3E3C089F27B2D66900553696 /* MainTabBarController.swift in Sources */,
 				3ED8518D27C6A65B000344B7 /* LogInViewController.swift in Sources */,
 				3E3C089B27B2D66900553696 /* AppDelegate.swift in Sources */,
 				3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */,
+				3ED8519827CA5233000344B7 /* UIView+extention.swift in Sources */,
 				3EA804F827B6DB3500549187 /* ProfileViewController.swift in Sources */,
 				3EA804F627B6DB2300549187 /* FeedViewController.swift in Sources */,
 				3ED8519027C75EB5000344B7 /* UIColor+extension.swift in Sources */,

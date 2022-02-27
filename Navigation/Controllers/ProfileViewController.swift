@@ -19,11 +19,17 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
-        view.addSubview(profileHeaderView)
-        addConstraints()
+        configureSubviews()
+        setupConstraints()
     }
     
-    private func addConstraints() {
+    private func configureSubviews() {
+        
+        view.addSubview(profileHeaderView)
+    }
+        
+    private func setupConstraints() {
+        
         var constraints = [NSLayoutConstraint]()
         
         constraints.append(profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor))

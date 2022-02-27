@@ -20,15 +20,54 @@ class ProfileHeaderView: UIView {
         super.init(coder: coder)
     }
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .lightGray
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = .lightGray
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 30
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var tabelView: UITableView = {
+        let tabelView = UITableView()
+        tabelView.layer.cornerRadius = 10
+        tabelView.translatesAutoresizingMaskIntoConstraints = false
+        return tabelView
+    }()
+    
     private lazy var name: UILabel = {
         let name = UILabel()
         name.text = "K1LL B1LL"
         name.font = .systemFont(ofSize: 35, weight: .bold)
         name.adjustsFontSizeToFitWidth = true
         name.minimumScaleFactor = 0.5
-        self.addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
+    }()
+    
+    private lazy var favorites: UILabel = {
+        let favorites = UILabel()
+        favorites.text = "Favorites:"
+        favorites.font = .systemFont(ofSize: 25, weight: .light)
+        favorites.adjustsFontSizeToFitWidth = true
+        favorites.minimumScaleFactor = 0.5
+        favorites.translatesAutoresizingMaskIntoConstraints = false
+        return favorites
     }()
     
     private lazy var status: UITextView = {
@@ -74,14 +113,14 @@ class ProfileHeaderView: UIView {
         return showButton
     }()
     
-    private lazy var newButton: UIButton = {
-        let newButton = UIButton()
-        newButton.setTitle("edit profile", for: .normal)
-        newButton.backgroundColor = .gray
-        newButton.layer.cornerRadius = 7
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        return newButton
-    }()
+//    private lazy var newButton: UIButton = {
+//        let newButton = UIButton()
+//        newButton.setTitle("edit profile", for: .normal)
+//        newButton.backgroundColor = .gray
+//        newButton.layer.cornerRadius = 7
+//        newButton.translatesAutoresizingMaskIntoConstraints = false
+//        return newButton
+//    }()
 
     let avatarImage: UIImageView = {
         let portrait = UIImage(named: "portrait")
@@ -118,6 +157,26 @@ class ProfileHeaderView: UIView {
         labelstackView.translatesAutoresizingMaskIntoConstraints = false
         return labelstackView
     }()
+    
+    private func setTableViewDelegate() {
+        tabelView.delegate = self
+        tabelView.dataSource = self
+    
+    }
+    
+    private func addFavoritesLoots(_ headLabel: String,_ image: UIImage,_ post: String) {
+        let view = UIView()
+        let headLabelinView = UILabel()
+        let imageInView = UIImageView(image: image)
+        let postInView = UILabel()
+        
+        view.addSubview(headLabelinView)
+        view.addSubview(imageInView)
+        view.addSubview(postInView)
+        headLabelinView.text = headLabel
+        postInView.text = post
+    }
+    
 
     private func addConstraints() {
         
@@ -125,11 +184,34 @@ class ProfileHeaderView: UIView {
         self.addSubview(avatarImage)
         self.addSubview(textField)
         self.addSubview(showButton)
-        self.addSubview(newButton)
+//        self.addSubview(newButton)
+        self.addSubview(favorites)
+        self.addSubview(scrollView)
+        scrollView.addSubview(self.contentView)
+        contentView.addSubview(self.stackView)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
+        
+        
+        for _ in 0..<4 {
+            let view = UIView()
+//            setTableViewDelegate()
+//            view.backgroundColor = .systemGray4
+            view.layer.cornerRadius = 10
+            view.backgroundColor = .systemGray4
+            self.stackView.addArrangedSubview(view)
+            addFavoritesLoots("first", UIImage(named: "portrait")!, "text")
+//            view.addSubview(pivoImage)
+//            pivoImage.pin(to: view)
+
+        }
 
         var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
+        constraints.append(favorites.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor))
+        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
+        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 60))
         
         constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
         constraints.append(avatarImage.leadingAnchor.constraint(greaterThanOrEqualTo: self.leadingAnchor, constant: 20))
@@ -153,13 +235,48 @@ class ProfileHeaderView: UIView {
         constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
         constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
         
-        
-        constraints.append(newButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 130))
-        constraints.append(newButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -130))
-        constraints.append(newButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 420))
+        constraints.append(self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor))
+        constraints.append(self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor))
+        constraints.append(self.scrollView.leftAnchor.constraint(equalTo: self.leftAnchor))
+        constraints.append(self.scrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
 
+        constraints.append(self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
+        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor))
+        constraints.append(self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
+        constraints.append(self.contentView.widthAnchor.constraint(equalToConstant: 330))
+        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
+
+        constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
+        constraints.append(self.stackView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor))
+        constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
+        constraints.append(self.stackView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor))
+        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
         
-    
+//        constraints.append(newButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 130))
+//        constraints.append(newButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -130))
+//        constraints.append(newButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
+
         NSLayoutConstraint.activate(constraints)
+        
+        for view in self.stackView.arrangedSubviews {
+            
+            NSLayoutConstraint.activate([
+                view.heightAnchor.constraint(equalToConstant: 230),
+                view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            ])
+        }
     }
 }
+
+extension ProfileHeaderView: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+}
+
