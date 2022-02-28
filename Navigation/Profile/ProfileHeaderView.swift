@@ -43,13 +43,6 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
-    private lazy var tabelView: UITableView = {
-        let tabelView = UITableView()
-        tabelView.layer.cornerRadius = 10
-        tabelView.translatesAutoresizingMaskIntoConstraints = false
-        return tabelView
-    }()
-    
     private lazy var name: UILabel = {
         let name = UILabel()
         name.text = "K1LL B1LL"
@@ -157,26 +150,6 @@ class ProfileHeaderView: UIView {
         labelstackView.translatesAutoresizingMaskIntoConstraints = false
         return labelstackView
     }()
-    
-    private func setTableViewDelegate() {
-        tabelView.delegate = self
-        tabelView.dataSource = self
-    
-    }
-    
-    private func addFavoritesLoots(_ headLabel: String,_ image: UIImage,_ post: String) {
-        let view = UIView()
-        let headLabelinView = UILabel()
-        let imageInView = UIImageView(image: image)
-        let postInView = UILabel()
-        
-        view.addSubview(headLabelinView)
-        view.addSubview(imageInView)
-        view.addSubview(postInView)
-        headLabelinView.text = headLabel
-        postInView.text = post
-    }
-    
 
     private func addConstraints() {
         
@@ -191,19 +164,15 @@ class ProfileHeaderView: UIView {
         contentView.addSubview(self.stackView)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
-        
-        
+              
         for _ in 0..<4 {
-            let view = UIView()
-//            setTableViewDelegate()
-//            view.backgroundColor = .systemGray4
-            view.layer.cornerRadius = 10
-            view.backgroundColor = .systemGray4
-            self.stackView.addArrangedSubview(view)
-            addFavoritesLoots("first", UIImage(named: "portrait")!, "text")
-//            view.addSubview(pivoImage)
-//            pivoImage.pin(to: view)
-
+            
+            let tabelView = UITableView()
+            tabelView.delegate = self
+            tabelView.dataSource = self
+            tabelView.layer.cornerRadius = 10
+            tabelView.rowHeight = 100
+            self.stackView.addArrangedSubview(tabelView)
         }
 
         var constraints = [NSLayoutConstraint]()
@@ -225,7 +194,7 @@ class ProfileHeaderView: UIView {
         
         constraints.append(textField.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
         constraints.append(textField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 30))
-        constraints.append(textField.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -30))
+        constraints.append(textField.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -45))
         constraints.append(textField.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
         
         constraints.append(showButton.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
@@ -271,8 +240,9 @@ class ProfileHeaderView: UIView {
 
 extension ProfileHeaderView: UITableViewDelegate, UITableViewDataSource {
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
