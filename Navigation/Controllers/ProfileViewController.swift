@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     private let profileHeaderView: UIView = {
         let profileHearderView = ProfileHeaderView()
         profileHearderView.translatesAutoresizingMaskIntoConstraints = false
-        profileHearderView.backgroundColor = .lightGray
+        profileHearderView.backgroundColor = .white
         return profileHearderView
     } ()
 

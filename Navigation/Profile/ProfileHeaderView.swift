@@ -22,14 +22,14 @@ class ProfileHeaderView: UIView {
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .lightGray
+        scrollView.backgroundColor = .white
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
     private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = .lightGray
+        contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
@@ -55,7 +55,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var favorites: UILabel = {
         let favorites = UILabel()
-        favorites.text = "Favorites:"
+        favorites.text = "My Loots:"
         favorites.font = .systemFont(ofSize: 25, weight: .light)
         favorites.adjustsFontSizeToFitWidth = true
         favorites.minimumScaleFactor = 0.5
@@ -150,6 +150,11 @@ class ProfileHeaderView: UIView {
         labelstackView.translatesAutoresizingMaskIntoConstraints = false
         return labelstackView
     }()
+    
+    var posts: [PostView] = []
+    struct Cells {
+        static let postCell = "PostTableViewCell"
+    }
 
     private func addConstraints() {
         
@@ -164,17 +169,16 @@ class ProfileHeaderView: UIView {
         contentView.addSubview(self.stackView)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
-              
-        for _ in 0..<4 {
-            
-            let tabelView = UITableView()
-            tabelView.delegate = self
-            tabelView.dataSource = self
-            tabelView.layer.cornerRadius = 10
-            tabelView.rowHeight = 100
-            self.stackView.addArrangedSubview(tabelView)
-        }
-
+        
+        posts = fetchData()
+        let tabelView = UITableView()
+        tabelView.delegate = self
+        tabelView.dataSource = self
+        tabelView.layer.cornerRadius = 10
+        tabelView.estimatedRowHeight = 150
+        tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
+        self.stackView.addArrangedSubview(tabelView)
+        
         var constraints = [NSLayoutConstraint]()
         
         constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
@@ -213,7 +217,7 @@ class ProfileHeaderView: UIView {
         constraints.append(self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
         constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor))
         constraints.append(self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
-        constraints.append(self.contentView.widthAnchor.constraint(equalToConstant: 330))
+        constraints.append(self.contentView.widthAnchor.constraint(equalToConstant: 320))
         constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
 
         constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
@@ -231,22 +235,9 @@ class ProfileHeaderView: UIView {
         for view in self.stackView.arrangedSubviews {
             
             NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(equalToConstant: 230),
+                view.heightAnchor.constraint(equalToConstant: 390),
                 view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
             ])
         }
     }
 }
-
-extension ProfileHeaderView: UITableViewDelegate, UITableViewDataSource {
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-}
-
