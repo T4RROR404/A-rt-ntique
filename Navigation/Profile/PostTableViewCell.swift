@@ -15,6 +15,7 @@ class ProfileHeaderViewCell: UITableViewCell {
         authorPost.font = .systemFont(ofSize: 20, weight: .bold)
         authorPost.adjustsFontForContentSizeCategory = true
         authorPost.minimumScaleFactor = 0.5
+        authorPost.textAlignment = .center
         authorPost.translatesAutoresizingMaskIntoConstraints = false
         return authorPost
     }()
@@ -29,6 +30,7 @@ class ProfileHeaderViewCell: UITableViewCell {
         let descriptionPost = UILabel()
         descriptionPost.font = .systemFont(ofSize: 12, weight: .light)
         descriptionPost.numberOfLines = 5
+        descriptionPost.textAlignment = .center
         descriptionPost.translatesAutoresizingMaskIntoConstraints = false
         return descriptionPost
     }()
@@ -67,9 +69,8 @@ class ProfileHeaderViewCell: UITableViewCell {
         authorPost.text = post.author
         imagePost.image = post.imageName
         descriptionPost.text = post.description
-        likesPost.text = "\(post.likes) Likes                               \(post.views) Views"
+        likesPost.text = "\(post.views) Views                                  \(post.price) $"
 //        viewsPost.text = "\(post.views) Views"
-        
     }
     
     private func configureTableView() {
@@ -88,8 +89,11 @@ class ProfileHeaderViewCell: UITableViewCell {
         constraints.append(stackView.bottomAnchor.constraint(equalTo: bottomAnchor))
         constraints.append(stackView.leadingAnchor.constraint(equalTo: leadingAnchor))
         constraints.append(stackView.trailingAnchor.constraint(equalTo: trailingAnchor))
-        constraints.append(imagePost.widthAnchor.constraint(equalToConstant: 300))
         constraints.append(imagePost.heightAnchor.constraint(equalToConstant: 300))
+        
+        for views in stackView.arrangedSubviews {
+            views.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
+        }
                 
         NSLayoutConstraint.activate(constraints)
     }
@@ -99,7 +103,7 @@ struct PostView {
     let author: String
     let description: String
     let imageName:UIImage
-    let likes: Int
+    let price: Int
     let views: Int
 }
 

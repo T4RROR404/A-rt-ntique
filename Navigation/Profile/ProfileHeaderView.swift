@@ -65,10 +65,11 @@ class ProfileHeaderView: UIView {
     
     private lazy var status: UITextView = {
         let status = UITextView()
-        status.backgroundColor = .systemGray2
+        status.backgroundColor = .systemGray4
         status.font = .systemFont(ofSize: 20)
         status.textColor = .systemGray
-        status.text = "status"
+        status.text = " status"
+        status.layer.cornerRadius = 5
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
@@ -82,7 +83,7 @@ class ProfileHeaderView: UIView {
         textField.autocapitalizationType = .words
         textField.font = .systemFont(ofSize: 15)
         textField.textColor = .systemGray2
-        textField.backgroundColor = .systemGray4
+        textField.backgroundColor = .systemGray5
         textField.borderStyle = .roundedRect
         textField.returnKeyType = .next
         textField.keyboardType = .default
@@ -118,6 +119,10 @@ class ProfileHeaderView: UIView {
     let avatarImage: UIImageView = {
         let portrait = UIImage(named: "portrait")
         let avatarImage = UIImageView(image: portrait)
+        avatarImage.layer.shadowColor = UIColor.black.cgColor
+        avatarImage.layer.shadowOffset = CGSize(width: 10, height: 10)
+        avatarImage.layer.shadowRadius = 20
+        avatarImage.layer.shadowOpacity = 0.3
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
         return avatarImage
     } ()
@@ -182,7 +187,7 @@ class ProfileHeaderView: UIView {
         var constraints = [NSLayoutConstraint]()
         
         constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
-        constraints.append(favorites.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor))
+        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30))
         constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
         constraints.append(favorites.heightAnchor.constraint(equalToConstant: 60))
         
