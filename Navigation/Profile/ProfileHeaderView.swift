@@ -56,7 +56,7 @@ class ProfileHeaderView: UIView {
     private lazy var favorites: UILabel = {
         let favorites = UILabel()
         favorites.text = "My Loots:"
-        favorites.font = .systemFont(ofSize: 25, weight: .light)
+        favorites.font = .systemFont(ofSize: 20, weight: .light)
         favorites.adjustsFontSizeToFitWidth = true
         favorites.minimumScaleFactor = 0.5
         favorites.translatesAutoresizingMaskIntoConstraints = false
@@ -186,7 +186,7 @@ class ProfileHeaderView: UIView {
         
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
+        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 80))
         constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30))
         constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
         constraints.append(favorites.heightAnchor.constraint(equalToConstant: 60))
@@ -213,7 +213,7 @@ class ProfileHeaderView: UIView {
         constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
         constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
         
-        constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 420))
+        constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 470))
         constraints.append(self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor))
         constraints.append(self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor))
         constraints.append(self.scrollView.leftAnchor.constraint(equalTo: self.leftAnchor))
