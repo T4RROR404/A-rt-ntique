@@ -20,29 +20,6 @@ class ProfileHeaderView: UIView {
         super.init(coder: coder)
     }
     
-    private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
-    private lazy var contentView: UIView = {
-        let contentView = UIView()
-        contentView.backgroundColor = .white
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        return contentView
-    }()
-    
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 30
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     private lazy var name: UILabel = {
         let name = UILabel()
         name.text = "K1LL B1LL"
@@ -51,16 +28,6 @@ class ProfileHeaderView: UIView {
         name.minimumScaleFactor = 0.5
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
-    }()
-    
-    private lazy var favorites: UILabel = {
-        let favorites = UILabel()
-        favorites.text = "My Loots:"
-        favorites.font = .systemFont(ofSize: 20, weight: .light)
-        favorites.adjustsFontSizeToFitWidth = true
-        favorites.minimumScaleFactor = 0.5
-        favorites.translatesAutoresizingMaskIntoConstraints = false
-        return favorites
     }()
     
     private lazy var status: UITextView = {
@@ -132,13 +99,13 @@ class ProfileHeaderView: UIView {
         status.textColor = .black
         textField.text = ""
         UIView.animate(withDuration: 1.0) {
-            self.showButton.frame = CGRect(x: 205, y: 320, width: 160, height: 50)
+            self.showButton.frame = CGRect(x: 205, y: 300, width: 160, height: 50)
             self.textField.alpha = 1
             self.endEditing(true)
             if self.status.hasText {
                 self.showButton.setTitle("Change Status", for: .normal)
                 self.textField.alpha = 0
-                self.showButton.frame = CGRect(x: 205, y: 270, width: 160, height: 50)
+                self.showButton.frame = CGRect(x: 205, y: 250, width: 160, height: 50)
             }
         }
     }
@@ -155,48 +122,33 @@ class ProfileHeaderView: UIView {
         labelstackView.translatesAutoresizingMaskIntoConstraints = false
         return labelstackView
     }()
-    
-    var posts: [PostView] = []
-    struct Cells {
-        static let postCell = "PostTableViewCell"
-    }
 
     private func addConstraints() {
         
+        let profileTableHeaderView = ProfileTableHederView()
+        profileTableHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addSubview(profileTableHeaderView)
         self.addSubview(labelStackView)
         self.addSubview(avatarImage)
         self.addSubview(textField)
         self.addSubview(showButton)
-//        self.addSubview(newButton)
-        self.addSubview(favorites)
-        self.addSubview(scrollView)
-        scrollView.addSubview(self.contentView)
-        contentView.addSubview(self.stackView)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
         
-        posts = fetchData()
-        let tabelView = UITableView()
-        tabelView.delegate = self
-        tabelView.dataSource = self
-        tabelView.layer.cornerRadius = 10
-        tabelView.estimatedRowHeight = 150
-        tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
-        self.stackView.addArrangedSubview(tabelView)
-        
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 80))
-        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30))
-        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
-        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 60))
+        constraints.append(profileTableHeaderView.topAnchor.constraint(equalTo: self.topAnchor, constant: 380))
+        constraints.append(profileTableHeaderView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 33))
+        constraints.append(profileTableHeaderView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -33))
+        constraints.append(profileTableHeaderView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
         
         constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
-        constraints.append(avatarImage.leadingAnchor.constraint(greaterThanOrEqualTo: self.leadingAnchor, constant: 20))
-        constraints.append(avatarImage.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: -240))
-        constraints.append(avatarImage.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 430))
+        constraints.append(avatarImage.leadingAnchor.constraint(greaterThanOrEqualTo: self.leadingAnchor, constant: 30))
+        constraints.append(avatarImage.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: -280))
+        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -500))
         
-        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 50))
+        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30))
         constraints.append(labelStackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 30))
         constraints.append(labelStackView.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -20))
         constraints.append(labelStackView.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 450))
@@ -212,37 +164,7 @@ class ProfileHeaderView: UIView {
         constraints.append(showButton.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
         constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
         constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
-        
-        constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 470))
-        constraints.append(self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor))
-        constraints.append(self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor))
-        constraints.append(self.scrollView.leftAnchor.constraint(equalTo: self.leftAnchor))
-        constraints.append(self.scrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
-
-        constraints.append(self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
-        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor))
-        constraints.append(self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
-        constraints.append(self.contentView.widthAnchor.constraint(equalToConstant: 320))
-        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
-
-        constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
-        constraints.append(self.stackView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor))
-        constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
-        constraints.append(self.stackView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor))
-        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
-        
-//        constraints.append(newButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 130))
-//        constraints.append(newButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -130))
-//        constraints.append(newButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
 
         NSLayoutConstraint.activate(constraints)
-        
-        for view in self.stackView.arrangedSubviews {
-            
-            NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(equalToConstant: 390),
-                view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-            ])
-        }
     }
 }
