@@ -74,7 +74,7 @@ class ProfileTableHederView: UIView {
         tabelView.delegate = self
         tabelView.dataSource = self
         tabelView.layer.cornerRadius = 10
-        tabelView.sectionHeaderHeight = 320
+        tabelView.sectionHeaderHeight = 280
         tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
         self.stackView.addArrangedSubview(tabelView)
     

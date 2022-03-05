@@ -99,13 +99,13 @@ class ProfileHeaderView: UIView {
         status.textColor = .black
         textField.text = ""
         UIView.animate(withDuration: 1.0) {
-            self.showButton.frame = CGRect(x: 189, y: 180, width: 160, height: 50)
+            self.showButton.frame = CGRect(x: 188, y: 180, width: 160, height: 50)
             self.textField.alpha = 1
             self.endEditing(true)
             if self.status.hasText {
                 self.showButton.setTitle("Change Status", for: .normal)
                 self.textField.alpha = 0
-                self.showButton.frame = CGRect(x: 189, y: 120, width: 160, height: 50)
+                self.showButton.frame = CGRect(x: 188, y: 120, width: 160, height: 50)
             }
         }
     }
