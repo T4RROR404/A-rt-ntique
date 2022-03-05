@@ -88,7 +88,7 @@ class ProfileHeaderView: UIView {
         let avatarImage = UIImageView(image: portrait)
         avatarImage.layer.shadowColor = UIColor.black.cgColor
         avatarImage.layer.shadowOffset = CGSize(width: 10, height: 10)
-        avatarImage.layer.shadowRadius = 20
+        avatarImage.layer.shadowRadius = 10
         avatarImage.layer.shadowOpacity = 0.3
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
         return avatarImage
@@ -99,13 +99,13 @@ class ProfileHeaderView: UIView {
         status.textColor = .black
         textField.text = ""
         UIView.animate(withDuration: 1.0) {
-            self.showButton.frame = CGRect(x: 205, y: 300, width: 160, height: 50)
+            self.showButton.frame = CGRect(x: 189, y: 180, width: 160, height: 50)
             self.textField.alpha = 1
             self.endEditing(true)
             if self.status.hasText {
                 self.showButton.setTitle("Change Status", for: .normal)
                 self.textField.alpha = 0
-                self.showButton.frame = CGRect(x: 205, y: 250, width: 160, height: 50)
+                self.showButton.frame = CGRect(x: 189, y: 120, width: 160, height: 50)
             }
         }
     }
@@ -125,10 +125,6 @@ class ProfileHeaderView: UIView {
 
     private func addConstraints() {
         
-        let profileTableHeaderView = ProfileTableHederView()
-        profileTableHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.addSubview(profileTableHeaderView)
         self.addSubview(labelStackView)
         self.addSubview(avatarImage)
         self.addSubview(textField)
@@ -138,29 +134,23 @@ class ProfileHeaderView: UIView {
         
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(profileTableHeaderView.topAnchor.constraint(equalTo: self.topAnchor, constant: 380))
-        constraints.append(profileTableHeaderView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 33))
-        constraints.append(profileTableHeaderView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -33))
-        constraints.append(profileTableHeaderView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor))
+        constraints.append(avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
+        constraints.append(avatarImage.trailingAnchor.constraint(equalTo: labelStackView.leadingAnchor, constant: -30))
+        constraints.append(avatarImage.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 40))
         
-        constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
-        constraints.append(avatarImage.leadingAnchor.constraint(greaterThanOrEqualTo: self.leadingAnchor, constant: 30))
-        constraints.append(avatarImage.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: -280))
-        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -500))
-        
-        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30))
-        constraints.append(labelStackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 30))
-        constraints.append(labelStackView.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -20))
-        constraints.append(labelStackView.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 450))
+        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor))
+        constraints.append(labelStackView.widthAnchor.constraint(equalToConstant: 160))
+        constraints.append(labelStackView.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30))
         
         constraints.append(textField.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
-        constraints.append(textField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 30))
-        constraints.append(textField.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -45))
+        constraints.append(textField.centerXAnchor.constraint(equalTo: labelStackView.centerXAnchor))
+        constraints.append(textField.widthAnchor.constraint(equalToConstant: 160))
         constraints.append(textField.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
         
         constraints.append(showButton.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
         constraints.append(showButton.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 30))
-        constraints.append(showButton.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -20))
+        constraints.append(showButton.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -30))
         constraints.append(showButton.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
         constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
         constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))

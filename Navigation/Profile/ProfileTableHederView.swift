@@ -14,7 +14,6 @@ class ProfileTableHederView: UIView {
         addConstraints()
     }
     
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -42,7 +41,7 @@ class ProfileTableHederView: UIView {
         return stackView
     }()
     
-    private lazy var favorites: UILabel = {
+    lazy var favorites: UILabel = {
         let favorites = UILabel()
         favorites.text = "My Loots:"
         favorites.font = .systemFont(ofSize: 20, weight: .light)
@@ -52,15 +51,20 @@ class ProfileTableHederView: UIView {
         return favorites
     }()
     
+    lazy var profileView: UIView = {
+        let profileView = ProfileHeaderView()
+        profileView.translatesAutoresizingMaskIntoConstraints = false
+        return profileView
+    }()
     
     var posts: [PostView] = []
     struct Cells {
         static let postCell = "PostTableViewCell"
     }
-    
+        
     private func addConstraints() {
 
-        self.addSubview(favorites)
+//        self.addSubview(favorites)
         self.addSubview(scrollView)
         scrollView.addSubview(self.contentView)
         contentView.addSubview(self.stackView)
@@ -70,32 +74,32 @@ class ProfileTableHederView: UIView {
         tabelView.delegate = self
         tabelView.dataSource = self
         tabelView.layer.cornerRadius = 10
+        tabelView.sectionHeaderHeight = 320
         tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
         self.stackView.addArrangedSubview(tabelView)
-        
+    
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(favorites.topAnchor.constraint(equalTo: topAnchor, constant: 10))
-        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor))
-        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
-        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 50))
+//        constraints.append(favorites.topAnchor.constraint(equalTo: self.topAnchor, constant: 70))
+//        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30))
+//        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
+//        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 50))
         
-        constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.favorites.bottomAnchor, constant: 0))
+        constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
         constraints.append(self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor))
-        constraints.append(self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor))
+        constraints.append(self.scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10))
         constraints.append(self.scrollView.leftAnchor.constraint(equalTo: self.leftAnchor))
         constraints.append(self.scrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
 
         constraints.append(self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
-        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor))
         constraints.append(self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
-        constraints.append(self.contentView.widthAnchor.constraint(equalToConstant: 340))
-        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
+        constraints.append(self.contentView.trailingAnchor.constraint(equalTo: trailingAnchor))
+        constraints.append(self.contentView.leadingAnchor.constraint(equalTo: leadingAnchor))
 
         constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
-        constraints.append(self.stackView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor))
+        constraints.append(self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 30))
         constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
-        constraints.append(self.stackView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor))
+        constraints.append(self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -30))
         constraints.append(self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
         
         NSLayoutConstraint.activate(constraints)
@@ -104,10 +108,9 @@ class ProfileTableHederView: UIView {
         for view in self.stackView.arrangedSubviews {
             
             NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(equalToConstant: 390),
+                view.heightAnchor.constraint(equalToConstant: 700),
                 view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
             ])
         }
-        
     }
 }

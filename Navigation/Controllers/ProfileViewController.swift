@@ -9,11 +9,11 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private let profileHeaderView: UIView = {
-        let profileHearderView = ProfileHeaderView()
-        profileHearderView.translatesAutoresizingMaskIntoConstraints = false
-        profileHearderView.backgroundColor = .white
-        return profileHearderView
+    private let profileTableHeaderView: UIView = {
+        let profileTableHeaderView = ProfileTableHederView()
+        profileTableHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        profileTableHeaderView.backgroundColor = .white
+        return profileTableHeaderView
     } ()
 
     override func viewDidLoad() {
@@ -25,17 +25,17 @@ class ProfileViewController: UIViewController {
     
     private func configureSubviews() {
         
-        view.addSubview(profileHeaderView)
+        view.addSubview(profileTableHeaderView)
     }
         
     private func setupConstraints() {
         
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor))
-        constraints.append(profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor))
-        constraints.append(profileHeaderView.bottomAnchor.constraint(equalTo: view.bottomAnchor))
-        constraints.append(profileHeaderView.topAnchor.constraint(equalTo: view.topAnchor))
+        constraints.append(profileTableHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor))
+        constraints.append(profileTableHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor))
+        constraints.append(profileTableHeaderView.bottomAnchor.constraint(equalTo: view.bottomAnchor))
+        constraints.append(profileTableHeaderView.topAnchor.constraint(equalTo: view.topAnchor))
         
         NSLayoutConstraint.activate(constraints)
     }
