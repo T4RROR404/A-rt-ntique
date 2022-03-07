@@ -14,14 +14,23 @@ extension ProfileTableHederView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return posts.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! ProfileHeaderViewCell
-        let post = posts[indexPath.row]
-        cell.set(post: post)
-        return cell
+        
+        if indexPath.row  == 0 {
+            
+            let photoCell = tableView.dequeueReusableCell(withIdentifier: Cells.photoCell) as! PhotosTableViewCell
+            let photo = photos
+            photoCell.set4photo(photo: photo)
+            return photoCell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! ProfileHeaderViewCell
+            let post = posts[indexPath.row - 1]
+            cell.set(post: post)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

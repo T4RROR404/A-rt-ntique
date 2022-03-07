@@ -41,16 +41,6 @@ class ProfileTableHederView: UIView {
         return stackView
     }()
     
-    lazy var favorites: UILabel = {
-        let favorites = UILabel()
-        favorites.text = "My Loots:"
-        favorites.font = .systemFont(ofSize: 20, weight: .light)
-        favorites.adjustsFontSizeToFitWidth = true
-        favorites.minimumScaleFactor = 0.5
-        favorites.translatesAutoresizingMaskIntoConstraints = false
-        return favorites
-    }()
-    
     lazy var profileView: UIView = {
         let profileView = ProfileHeaderView()
         profileView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,13 +48,15 @@ class ProfileTableHederView: UIView {
     }()
     
     var posts: [PostView] = []
+    var photos = PhotoView(photoName1: Photos.photo1!, photoName2: Photos.photo2!, photoName3: Photos.photo3!, photoName4: Photos.photo4!)
+    
     struct Cells {
         static let postCell = "PostTableViewCell"
+        static let photoCell = "PhotosTableViewCell"
     }
         
     private func addConstraints() {
 
-//        self.addSubview(favorites)
         self.addSubview(scrollView)
         scrollView.addSubview(self.contentView)
         contentView.addSubview(self.stackView)
@@ -74,16 +66,13 @@ class ProfileTableHederView: UIView {
         tabelView.delegate = self
         tabelView.dataSource = self
         tabelView.layer.cornerRadius = 10
-        tabelView.sectionHeaderHeight = 280
+        tabelView.sectionHeaderHeight = 290
+        tabelView.estimatedRowHeight = 220
         tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
+        tabelView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.photoCell)
         self.stackView.addArrangedSubview(tabelView)
     
         var constraints = [NSLayoutConstraint]()
-        
-//        constraints.append(favorites.topAnchor.constraint(equalTo: self.topAnchor, constant: 70))
-//        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30))
-//        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
-//        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 50))
         
         constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
         constraints.append(self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor))
