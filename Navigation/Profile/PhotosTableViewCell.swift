@@ -60,7 +60,7 @@ class PhotosTableViewCell: UITableViewCell {
         photoStackView.addArrangedSubview(photoTable3)
         photoStackView.addArrangedSubview(photoTable4)
         
-        constraints.append(photoStackView.topAnchor.constraint(equalTo: topAnchor, constant: -20))
+        constraints.append(photoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20))
         constraints.append(photoStackView.leadingAnchor.constraint(equalTo: leadingAnchor))
         constraints.append(photoStackView.trailingAnchor.constraint(equalTo: trailingAnchor))
         constraints.append(photoStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20))
@@ -68,7 +68,7 @@ class PhotosTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
         
         for views in photoStackView.arrangedSubviews {
-            views.heightAnchor.constraint(equalToConstant: 65).isActive = true
+            views.heightAnchor.constraint(equalToConstant: 66).isActive = true
             views.widthAnchor.constraint(equalToConstant: 70).isActive = true
             views.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         }

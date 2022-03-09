@@ -84,8 +84,9 @@ class ProfileHeaderViewCell: UITableViewCell {
         stackView.addArrangedSubview(likesPost)
         stackView.addArrangedSubview(viewsPost)
         
-        constraints.append(stackView.centerYAnchor.constraint(equalTo: centerYAnchor))
+//        constraints.append(stackView.centerYAnchor.constraint(equalTo: centerYAnchor))
         constraints.append(stackView.centerXAnchor.constraint(equalTo: centerXAnchor))
+        constraints.append(stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10))
         constraints.append(stackView.bottomAnchor.constraint(equalTo: bottomAnchor))
         constraints.append(stackView.leadingAnchor.constraint(equalTo: leadingAnchor))
         constraints.append(stackView.trailingAnchor.constraint(equalTo: trailingAnchor))

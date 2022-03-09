@@ -94,15 +94,15 @@ class ProfileHeaderView: UIView {
         return avatarImage
     } ()
     
-    lazy var favorites: UILabel = {
-        let favorites = UILabel()
-        favorites.text = "Likes:"
-        favorites.font = .systemFont(ofSize: 20, weight: .light)
-        favorites.adjustsFontSizeToFitWidth = true
-        favorites.minimumScaleFactor = 0.5
-        favorites.translatesAutoresizingMaskIntoConstraints = false
-        return favorites
-    }()
+//    private lazy var favorites: UILabel = {
+//        let favorites = UILabel()
+//        favorites.text = "Likes:"
+//        favorites.font = .systemFont(ofSize: 20, weight: .light)
+//        favorites.adjustsFontSizeToFitWidth = true
+//        favorites.minimumScaleFactor = 0.5
+//        favorites.translatesAutoresizingMaskIntoConstraints = false
+//        return favorites
+//    }()
 
     @objc func buttonPressed() {
         status.text = textField.text
@@ -139,7 +139,7 @@ class ProfileHeaderView: UIView {
         self.addSubview(avatarImage)
         self.addSubview(textField)
         self.addSubview(showButton)
-        self.addSubview(favorites)
+//        self.addSubview(favorites)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
         
@@ -166,10 +166,10 @@ class ProfileHeaderView: UIView {
         constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
         constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
         
-        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
-        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20))
-        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
-        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 50))
+//        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
+//        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20))
+//        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
+//        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 50))
 
         NSLayoutConstraint.activate(constraints)
     }

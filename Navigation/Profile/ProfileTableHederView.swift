@@ -49,10 +49,14 @@ class ProfileTableHederView: UIView {
     
     var posts: [PostView] = []
     var photos = PhotoView(photoName1: Photos.photo1!, photoName2: Photos.photo2!, photoName3: Photos.photo3!, photoName4: Photos.photo4!)
+    var label = FavouritesView(favourites: "My Loots")
+    var likeLabel = myLikesView(myLikes: "My Likes")
     
     struct Cells {
         static let postCell = "PostTableViewCell"
         static let photoCell = "PhotosTableViewCell"
+        static let labelCell = "MyLootsViewCell"
+        static let likesCell = "LikesViewCell"
     }
         
     private func addConstraints() {
@@ -66,10 +70,12 @@ class ProfileTableHederView: UIView {
         tabelView.delegate = self
         tabelView.dataSource = self
         tabelView.layer.cornerRadius = 10
-        tabelView.sectionHeaderHeight = 290
+        tabelView.sectionHeaderHeight = 250
         tabelView.estimatedRowHeight = 220
         tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
         tabelView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.photoCell)
+        tabelView.register(MyLootsViewCell.self, forCellReuseIdentifier: Cells.labelCell)
+        tabelView.register(LikesViewCell.self, forCellReuseIdentifier: Cells.likesCell)
         self.stackView.addArrangedSubview(tabelView)
     
         var constraints = [NSLayoutConstraint]()
@@ -78,18 +84,18 @@ class ProfileTableHederView: UIView {
         constraints.append(self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor))
         constraints.append(self.scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10))
         constraints.append(self.scrollView.leftAnchor.constraint(equalTo: self.leftAnchor))
-        constraints.append(self.scrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
+        constraints.append(self.scrollView.centerXAnchor.constraint(equalTo: centerXAnchor))
 
         constraints.append(self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
         constraints.append(self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
-        constraints.append(self.contentView.trailingAnchor.constraint(equalTo: trailingAnchor))
-        constraints.append(self.contentView.leadingAnchor.constraint(equalTo: leadingAnchor))
+        constraints.append(self.contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor))
+        constraints.append(self.contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor))
 
         constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
         constraints.append(self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 30))
         constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
         constraints.append(self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -30))
-        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
+        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor))
         
         NSLayoutConstraint.activate(constraints)
         

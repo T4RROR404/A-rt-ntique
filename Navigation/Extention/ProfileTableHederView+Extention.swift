@@ -14,20 +14,34 @@ extension ProfileTableHederView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count + 1
+        return posts.count + 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row  == 0 {
             
+            let likesCell = tableView.dequeueReusableCell(withIdentifier: Cells.likesCell) as! LikesViewCell
+            likesCell.setLikes(myLikes: likeLabel)
+            likesCell.backgroundColor = .systemGray5
+            return likesCell
+        
+        } else if indexPath.row  == 1 {
+            
             let photoCell = tableView.dequeueReusableCell(withIdentifier: Cells.photoCell) as! PhotosTableViewCell
             let photo = photos
             photoCell.set4photo(photo: photo)
             return photoCell
+            
+        } else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.labelCell) as! MyLootsViewCell
+            cell.setFav(favourites: label)
+            cell.backgroundColor = .systemGray5
+            return cell
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! ProfileHeaderViewCell
-            let post = posts[indexPath.row - 1]
+            let post = posts[indexPath.row - 3]
             cell.set(post: post)
             return cell
         }
