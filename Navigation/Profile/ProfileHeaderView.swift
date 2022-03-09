@@ -32,11 +32,11 @@ class ProfileHeaderView: UIView {
     
     private lazy var status: UITextView = {
         let status = UITextView()
-        status.backgroundColor = .systemGray4
+        status.backgroundColor = #colorLiteral(red: 0.8745098039, green: 0.8745098039, blue: 0.8745098039, alpha: 1)
         status.font = .systemFont(ofSize: 20)
         status.textColor = .systemGray
         status.text = " status"
-        status.layer.cornerRadius = 5
+        status.layer.cornerRadius = 7
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
@@ -50,12 +50,13 @@ class ProfileHeaderView: UIView {
         textField.autocapitalizationType = .words
         textField.font = .systemFont(ofSize: 15)
         textField.textColor = .systemGray2
-        textField.backgroundColor = .systemGray5
-        textField.borderStyle = .roundedRect
+        textField.backgroundColor = .white
+        textField.borderStyle = .none
         textField.returnKeyType = .next
         textField.keyboardType = .default
         textField.clearButtonMode = .always
-        textField.alpha = 0
+        textField.layer.cornerRadius = 7
+//        textField.alpha = 0
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     } ()
@@ -64,7 +65,7 @@ class ProfileHeaderView: UIView {
         let showButton = UIButton()
         showButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         showButton.setTitle("Create Status", for: .normal)
-        showButton.backgroundColor = .systemBlue
+        showButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         showButton.layer.cornerRadius = 7
         showButton.layer.shadowColor = UIColor.black.cgColor
         showButton.layer.shadowOffset = CGSize(width: 5, height: 5)
@@ -108,16 +109,16 @@ class ProfileHeaderView: UIView {
         status.text = textField.text
         status.textColor = .black
         textField.text = ""
-        UIView.animate(withDuration: 1.0) {
-            self.showButton.frame = CGRect(x: 188, y: 180, width: 160, height: 50)
-            self.textField.alpha = 1
+//        UIView.animate(withDuration: 1.0) {
+//            self.showButton.frame = CGRect(x: 188, y: 180, width: 160, height: 50)
+//            self.textField.alpha = 1
             self.endEditing(true)
             if self.status.hasText {
                 self.showButton.setTitle("Change Status", for: .normal)
-                self.textField.alpha = 0
-                self.showButton.frame = CGRect(x: 188, y: 120, width: 160, height: 50)
+//                self.textField.alpha = 0
+//                self.showButton.frame = CGRect(x: 188, y: 120, width: 160, height: 50)
             }
-        }
+//        }
     }
     
     @objc func tap(_ sender: Any) {
@@ -128,43 +129,48 @@ class ProfileHeaderView: UIView {
         let labelstackView = UIStackView()
         labelstackView.axis = .vertical
         labelstackView.distribution = .fillEqually
-        labelstackView.spacing = 20
+        labelstackView.spacing = 15
         labelstackView.translatesAutoresizingMaskIntoConstraints = false
         return labelstackView
     }()
 
     private func addConstraints() {
         
-        self.addSubview(labelStackView)
         self.addSubview(avatarImage)
-        self.addSubview(textField)
-        self.addSubview(showButton)
+        self.addSubview(labelStackView)
+        
+//        self.addSubview(textField)
+//        self.addSubview(showButton)
 //        self.addSubview(favorites)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
+        labelStackView.addArrangedSubview(textField)
+        labelStackView.addArrangedSubview(showButton)
         
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor))
-        constraints.append(avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
+        constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
+        constraints.append(avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
         constraints.append(avatarImage.trailingAnchor.constraint(equalTo: labelStackView.leadingAnchor, constant: -30))
-        constraints.append(avatarImage.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 40))
+        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25))
         
-        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor))
-        constraints.append(labelStackView.widthAnchor.constraint(equalToConstant: 160))
-        constraints.append(labelStackView.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30))
+        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
+        constraints.append(labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -45))
+//        constraints.append(labelStackView.widthAnchor.constraint(equalToConstant: 180))
+        constraints.append(labelStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -50))
         
-        constraints.append(textField.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
-        constraints.append(textField.centerXAnchor.constraint(equalTo: labelStackView.centerXAnchor))
-        constraints.append(textField.widthAnchor.constraint(equalToConstant: 160))
-        constraints.append(textField.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
-        
-        constraints.append(showButton.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
-        constraints.append(showButton.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 30))
-        constraints.append(showButton.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -30))
-        constraints.append(showButton.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
-        constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
-        constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
+//        constraints.append(textField.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
+//
+//        constraints.append(textField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 20))
+//        constraints.append(textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10))
+//        constraints.append(textField.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -80))
+//
+//        constraints.append(showButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 15))
+//        constraints.append(showButton.leadingAnchor.constraint(equalTo:  avatarImage.trailingAnchor, constant: 20))
+//        constraints.append(showButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30))
+//        constraints.append(showButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -15))
+//        constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
+//        constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
         
 //        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
 //        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20))

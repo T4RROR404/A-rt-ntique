@@ -88,8 +88,8 @@ class ProfileHeaderViewCell: UITableViewCell {
         constraints.append(stackView.centerXAnchor.constraint(equalTo: centerXAnchor))
         constraints.append(stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10))
         constraints.append(stackView.bottomAnchor.constraint(equalTo: bottomAnchor))
-        constraints.append(stackView.leadingAnchor.constraint(equalTo: leadingAnchor))
-        constraints.append(stackView.trailingAnchor.constraint(equalTo: trailingAnchor))
+        constraints.append(stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
+        constraints.append(stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
         constraints.append(imagePost.heightAnchor.constraint(equalToConstant: 350))
         
         for views in stackView.arrangedSubviews {

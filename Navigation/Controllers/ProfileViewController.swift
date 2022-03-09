@@ -47,8 +47,8 @@ class ProfileViewController: UIViewController {
     
     var posts: [PostView] = []
     var photos = PhotoView(photoName1: Photos.photo1!, photoName2: Photos.photo2!, photoName3: Photos.photo3!, photoName4: Photos.photo4!)
-    var label = FavouritesView(favourites: "My Loots")
-    var likeLabel = myLikesView(myLikes: "My Likes")
+    var label = FavouritesView(favourites: "My Loots:")
+    var likeLabel = myLikesView(myLikes: "My Likes:")
     
     struct Cells {
         static let postCell = "PostTableViewCell"
@@ -78,9 +78,9 @@ class ProfileViewController: UIViewController {
     
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10))
+        constraints.append(scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
         constraints.append(scrollView.rightAnchor.constraint(equalTo: view.rightAnchor))
-        constraints.append(scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10))
+        constraints.append(scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
         constraints.append(scrollView.leftAnchor.constraint(equalTo: view.leftAnchor))
         constraints.append(scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
 
@@ -90,9 +90,9 @@ class ProfileViewController: UIViewController {
         constraints.append(contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor))
 
         constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
-        constraints.append(self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 30))
+        constraints.append(self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor))
         constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
-        constraints.append(self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -30))
+        constraints.append(self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor))
         constraints.append(self.stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor))
         
         NSLayoutConstraint.activate(constraints)
@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController {
         for view in self.stackView.arrangedSubviews {
             
             NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(equalToConstant: 700),
+                view.heightAnchor.constraint(equalToConstant: 710),
                 view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
             ])
         }

@@ -1,5 +1,5 @@
 //
-//  ProfileHeaderView+Extention.swift
+//  ProfileViewController+Extention.swift
 //  Navigation
 //
 //  Created by insomnia on 01.03.2022.
@@ -23,7 +23,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             let likesCell = tableView.dequeueReusableCell(withIdentifier: Cells.likesCell) as! LikesViewCell
             likesCell.setLikes(myLikes: likeLabel)
-            likesCell.backgroundColor = .systemGray5
+            likesCell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             return likesCell
         
         } else if indexPath.row  == 1 {
@@ -31,23 +31,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let photoCell = tableView.dequeueReusableCell(withIdentifier: Cells.photoCell) as! PhotosTableViewCell
             let photo = photos
             photoCell.set4photo(photo: photo)
+            photoCell.backgroundColor = #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1)
             return photoCell
             
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.labelCell) as! MyLootsViewCell
             cell.setFav(favourites: label)
-            cell.backgroundColor = .systemGray5
+            cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! ProfileHeaderViewCell
             let post = posts[indexPath.row - 3]
             cell.set(post: post)
+            cell.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        profileView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
         return profileView
     }
     
