@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ProfileTableHederView: UITableViewDelegate, UITableViewDataSource {
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -51,9 +51,17 @@ extension ProfileTableHederView: UITableViewDelegate, UITableViewDataSource {
         return profileView
     }
     
+    func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 1 {
+            let photosViewController = PhotosViewController()
+            navigationController?.pushViewController(photosViewController, animated: true)
+        }
+    }
+      
+    
 }
 
-extension ProfileTableHederView {
+extension ProfileViewController {
     func fetchData() -> [PostView] {
         let post1 = PostView(author: "PORTRAIT OF TWO BOYS. 1900", description: "Portrait of two boys in an expensive decorative frame. Collectible value is the work of an unknown master, a portrait painted in the style of Western European classicism, around the beginning of 1900. Two boys are depicted on the canvas in oil, most likely they are brothers, since external similarity is visually determined. The children are calmly and serenely posing for the master, one of them is leaning on the sideboard, the second is holding a net for catching butterflies and dragonflies.", imageName: Images.portraitsGays!, price: 29000, views: 3404)
         let post2 = PostView(author: "ANTIQUE WATCH. Girl with a baby. 1914", description: "Antique table clock, composition of a girl holding a baby. The color is gold, the clock mechanism is wound up from the key, the key is included with the watch.", imageName: Images.watch!, price: 39000, views: 1974)
