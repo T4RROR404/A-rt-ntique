@@ -24,6 +24,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let likesCell = tableView.dequeueReusableCell(withIdentifier: Cells.likesCell) as! LikesViewCell
             likesCell.setLikes(myLikes: likeLabel)
             likesCell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            likesCell.selectionStyle = UITableViewCell.SelectionStyle.none
             return likesCell
         
         } else if indexPath.row  == 1 {
@@ -32,12 +33,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let photo = photos
             photoCell.set4photo(photo: photo)
             photoCell.backgroundColor = #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1)
+            photoCell.selectionStyle = UITableViewCell.SelectionStyle.none
+            photoCell.isUserInteractionEnabled = true
             return photoCell
             
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Cells.labelCell) as! MyLootsViewCell
             cell.setFav(favourites: label)
             cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
             
         } else {
@@ -45,6 +49,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let post = posts[indexPath.row - 3]
             cell.set(post: post)
             cell.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         }
     }
@@ -58,10 +63,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 1 {
             let photosViewController = PhotosViewController()
             navigationController?.pushViewController(photosViewController, animated: true)
+            
         }
     }
-      
-    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 1 {
+            let photoCell = tableView.dequeueReusableCell(withIdentifier: Cells.photoCell) as! PhotosTableViewCell
+            photoCell.selectionStyle = UITableViewCell.SelectionStyle.none
+        }
+    }
 }
 
 extension ProfileViewController {
