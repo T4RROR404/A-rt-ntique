@@ -167,7 +167,7 @@ class LoginViewController: UIViewController {
         constraints.append(logoImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor))
         constraints.append(logoImage.widthAnchor.constraint(equalToConstant: 230))
         constraints.append(logoImage.heightAnchor.constraint(equalToConstant: 230))
-        constraints.append(logoImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60))
+        constraints.append(logoImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 58))
         
         constraints.append(loginButton.topAnchor.constraint(equalTo: self.fieldStackView.bottomAnchor, constant: 50))
         constraints.append(loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor))
