@@ -95,30 +95,21 @@ class ProfileHeaderView: UIView {
         return avatarImage
     } ()
     
-//    private lazy var favorites: UILabel = {
-//        let favorites = UILabel()
-//        favorites.text = "Likes:"
-//        favorites.font = .systemFont(ofSize: 20, weight: .light)
-//        favorites.adjustsFontSizeToFitWidth = true
-//        favorites.minimumScaleFactor = 0.5
-//        favorites.translatesAutoresizingMaskIntoConstraints = false
-//        return favorites
-//    }()
 
     @objc func buttonPressed() {
         status.text = textField.text
         status.textColor = .black
         textField.text = ""
-//        UIView.animate(withDuration: 1.0) {
-//            self.showButton.frame = CGRect(x: 188, y: 180, width: 160, height: 50)
-//            self.textField.alpha = 1
-            self.endEditing(true)
-            if self.status.hasText {
-                self.showButton.setTitle("Change Status", for: .normal)
-//                self.textField.alpha = 0
-//                self.showButton.frame = CGRect(x: 188, y: 120, width: 160, height: 50)
-            }
-//        }
+        //        UIView.animate(withDuration: 1.0) {
+        //            self.showButton.frame = CGRect(x: 188, y: 180, width: 160, height: 50)
+        //            self.textField.alpha = 1
+        self.endEditing(true)
+        if self.status.hasText {
+            self.showButton.setTitle("Change Status", for: .normal)
+            //                self.textField.alpha = 0
+            //                self.showButton.frame = CGRect(x: 188, y: 120, width: 160, height: 50)
+        }
+        //        }
     }
     
     @objc func tap(_ sender: Any) {
@@ -151,31 +142,20 @@ class ProfileHeaderView: UIView {
         
         constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
         constraints.append(avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
-        constraints.append(avatarImage.trailingAnchor.constraint(equalTo: labelStackView.leadingAnchor, constant: -30))
+        constraints.append(avatarImage.trailingAnchor.constraint(lessThanOrEqualTo: labelStackView.leadingAnchor, constant: -25))
         constraints.append(avatarImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25))
         
-        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
-        constraints.append(labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -45))
+        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20))
+        constraints.append(labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50))
 //        constraints.append(labelStackView.widthAnchor.constraint(equalToConstant: 180))
-        constraints.append(labelStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -50))
+        constraints.append(labelStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25))
         
-//        constraints.append(textField.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
-//
-//        constraints.append(textField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 20))
-//        constraints.append(textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10))
-//        constraints.append(textField.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -80))
-//
-//        constraints.append(showButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 15))
-//        constraints.append(showButton.leadingAnchor.constraint(equalTo:  avatarImage.trailingAnchor, constant: 20))
-//        constraints.append(showButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30))
-//        constraints.append(showButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -15))
-//        constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
-//        constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
-        
-//        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 10))
-//        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20))
-//        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
-//        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 50))
+        for _ in self.labelStackView.arrangedSubviews {
+
+            NSLayoutConstraint.activate([
+                textField.widthAnchor.constraint(equalToConstant: 170)
+            ])
+        }
 
         NSLayoutConstraint.activate(constraints)
     }

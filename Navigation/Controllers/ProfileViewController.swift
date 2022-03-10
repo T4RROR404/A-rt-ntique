@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController {
         for view in self.stackView.arrangedSubviews {
             
             NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(equalToConstant: 710),
+                view.heightAnchor.constraint(equalToConstant: 680),
                 view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
             ])
         }
