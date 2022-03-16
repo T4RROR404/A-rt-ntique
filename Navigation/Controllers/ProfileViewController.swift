@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         title = "Profile"
         view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = false
         setupConstraints()
     }
     

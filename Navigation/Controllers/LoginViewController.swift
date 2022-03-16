@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         addConstraint()
+        self.navigationController?.isNavigationBarHidden = true
 //        self.tabBarController?.tabBar.isHidden = true
 
     }
@@ -90,7 +91,7 @@ class LoginViewController: UIViewController {
     
     @objc func buttonPressed() {
         let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+        navigationController?.pushViewController(profileViewController, animated: true)        
     }
     
     private lazy var fieldStackView: UIStackView = {
