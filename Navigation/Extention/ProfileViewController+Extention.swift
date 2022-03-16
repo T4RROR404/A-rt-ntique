@@ -45,7 +45,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! ProfileHeaderViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! PostHeaderViewCell
             let post = posts[indexPath.row - 3]
             cell.set(post: post)
             cell.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)

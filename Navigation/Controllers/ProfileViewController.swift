@@ -71,7 +71,7 @@ class ProfileViewController: UIViewController {
         tabelView.layer.cornerRadius = 10
         tabelView.sectionHeaderHeight = 250
         tabelView.estimatedRowHeight = 220
-        tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
+        tabelView.register(PostHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
         tabelView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.photoCell)
         tabelView.register(MyLootsViewCell.self, forCellReuseIdentifier: Cells.labelCell)
         tabelView.register(LikesViewCell.self, forCellReuseIdentifier: Cells.likesCell)

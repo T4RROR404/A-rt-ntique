@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderViewCell: UITableViewCell {
+class PostHeaderViewCell: UITableViewCell {
     
     private lazy var authorPost: UILabel = {
         let authorPost = UILabel()

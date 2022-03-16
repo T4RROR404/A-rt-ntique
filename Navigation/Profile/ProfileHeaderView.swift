@@ -13,7 +13,9 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         addConstraints()
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+//        let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
         self.addGestureRecognizer(tap)
+//        self.avatarImage.addGestureRecognizer(avatarTap)
     }
     
     required init?(coder: NSCoder) {
@@ -91,10 +93,16 @@ class ProfileHeaderView: UIView {
         avatarImage.layer.shadowOffset = CGSize(width: 10, height: 10)
         avatarImage.layer.shadowRadius = 10
         avatarImage.layer.shadowOpacity = 0.3
+        avatarImage.isUserInteractionEnabled = true
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
         return avatarImage
     } ()
     
+//    @objc func onTapScreen() {
+//        UIView.animate(withDuration: 2) {
+//            self.avatarImage.frame = CGRect(x: 200, y: 400, width: 400, height: 400)
+//        }
+//    }
 
     @objc func buttonPressed() {
         status.text = textField.text
