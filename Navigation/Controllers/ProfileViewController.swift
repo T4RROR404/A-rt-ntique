@@ -9,12 +9,17 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    let profileView = ProfileHeaderView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
         view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = false
         setupConstraints()
+        let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
+        profileView.avatarImage.addGestureRecognizer(avatarTap)
+        
     }
     
     private lazy var scrollView: UIScrollView = {
@@ -31,6 +36,15 @@ class ProfileViewController: UIViewController {
         return contentView
     }()
     
+    lazy var avatarView: UIView = {
+        let avatarView = UIView()
+        avatarView.backgroundColor = .white
+        avatarView.alpha = 0
+        avatarView.isHidden = true
+        avatarView.translatesAutoresizingMaskIntoConstraints = false
+        return avatarView
+    }()
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -40,11 +54,78 @@ class ProfileViewController: UIViewController {
         return stackView
     }()
     
-    lazy var profileView: UIView = {
-        let profileView = ProfileHeaderView()
-        profileView.translatesAutoresizingMaskIntoConstraints = false
-        return profileView
+    private lazy var avatarImage: UIImageView = {
+        let portrait = UIImage(named: "portrait")
+        let avatarImage = UIImageView(image: portrait)
+        avatarImage.layer.shadowColor = UIColor.black.cgColor
+        avatarImage.layer.shadowOffset = CGSize(width: 10, height: 10)
+        avatarImage.layer.shadowRadius = 10
+        avatarImage.layer.shadowOpacity = 0.3
+        avatarImage.isUserInteractionEnabled = true
+        avatarImage.translatesAutoresizingMaskIntoConstraints = false
+        return avatarImage
+    } ()
+    
+    private lazy var exitButton: UIButton = {
+        let exitButton = UIButton()
+        exitButton.setTitle("exit", for: .normal)
+        exitButton.addTarget(self, action: #selector(exitPressed), for: .touchUpInside)
+        exitButton.backgroundColor = .gray
+        exitButton.layer.cornerRadius = 7
+        exitButton.translatesAutoresizingMaskIntoConstraints = false
+        return exitButton
     }()
+    
+    @objc func exitPressed() {
+        profileView.avatarImage.alpha = 1
+        UIView.animate(withDuration: 2) {
+            self.avatarView.isHidden = true
+        }
+    }
+    
+    private lazy var descriptionAvatar: UILabel = {
+        let descriptionAvatar = UILabel()
+        descriptionAvatar.font = .systemFont(ofSize: 12, weight: .light)
+        descriptionAvatar.numberOfLines = 100
+        descriptionAvatar.textAlignment = .center
+        descriptionAvatar.text = "Bill Gates, in full William Henry Gates III, (born October 28, 1955, Seattle, Washington, U.S.), American computer programmer and entrepreneur who cofounded Microsoft Corporation, the world’s largest personal-computer software company.Gates wrote his first software program at the age of 13. In high school he helped form a group of programmers who computerized their school’s payroll system and founded Traf-O-Data, a company that sold traffic-counting systems to local governments. In 1975 Gates, then a sophomore at Harvard University, joined his hometown friend Paul G."
+        descriptionAvatar.translatesAutoresizingMaskIntoConstraints = false
+        return descriptionAvatar
+    }()
+    
+        @objc func onTapScreen() {
+            
+            avatarView.addSubview(exitButton)
+            avatarView.addSubview(avatarImage)
+            avatarView.addSubview(descriptionAvatar)
+            
+            
+            var constraints = [NSLayoutConstraint] ()
+            
+            constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 60))
+            constraints.append(exitButton.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -580))
+            constraints.append(exitButton.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 310))
+            constraints.append(exitButton.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
+            
+            constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 100))
+            constraints.append(avatarImage.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -280))
+            constraints.append(avatarImage.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 100))
+            constraints.append(avatarImage.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -100))
+            
+            constraints.append(descriptionAvatar.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 20))
+            constraints.append(descriptionAvatar.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -10))
+            constraints.append(descriptionAvatar.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 30))
+            constraints.append(descriptionAvatar.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
+            
+            NSLayoutConstraint.activate(constraints)
+            
+            UIView.animate(withDuration: 2) {
+                self.profileView.avatarImage.alpha = 0
+                self.avatarView.isHidden = false
+                self.avatarView.alpha = 0.9
+                
+            }
+        }
     
     var posts: [PostView] = []
     var photos = PhotoView(photoName1: Photos.photo1!, photoName2: Photos.photo2!, photoName3: Photos.photo3!, photoName4: Photos.photo4!)
@@ -61,8 +142,11 @@ class ProfileViewController: UIViewController {
     private func setupConstraints() {
         
         view.addSubview(scrollView)
+        view.addSubview(avatarView)
         scrollView.addSubview(self.contentView)
         contentView.addSubview(self.stackView)
+        
+        profileView.translatesAutoresizingMaskIntoConstraints = false
         
         posts = fetchData()
         let tabelView = UITableView()
@@ -78,6 +162,12 @@ class ProfileViewController: UIViewController {
         self.stackView.addArrangedSubview(tabelView)
     
         var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(avatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+        constraints.append(avatarView.rightAnchor.constraint(equalTo: view.rightAnchor))
+        constraints.append(avatarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(avatarView.leftAnchor.constraint(equalTo: view.leftAnchor))
+        constraints.append(avatarView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
         constraints.append(scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
         constraints.append(scrollView.rightAnchor.constraint(equalTo: view.rightAnchor))

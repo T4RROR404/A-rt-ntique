@@ -13,9 +13,7 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         addConstraints()
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-//        let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
         self.addGestureRecognizer(tap)
-//        self.avatarImage.addGestureRecognizer(avatarTap)
     }
     
     required init?(coder: NSCoder) {
@@ -86,7 +84,7 @@ class ProfileHeaderView: UIView {
 //        return newButton
 //    }()
 
-    let avatarImage: UIImageView = {
+    lazy var avatarImage: UIImageView = {
         let portrait = UIImage(named: "portrait")
         let avatarImage = UIImageView(image: portrait)
         avatarImage.layer.shadowColor = UIColor.black.cgColor
@@ -97,12 +95,6 @@ class ProfileHeaderView: UIView {
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
         return avatarImage
     } ()
-    
-//    @objc func onTapScreen() {
-//        UIView.animate(withDuration: 2) {
-//            self.avatarImage.frame = CGRect(x: 200, y: 400, width: 400, height: 400)
-//        }
-//    }
 
     @objc func buttonPressed() {
         status.text = textField.text
@@ -137,10 +129,6 @@ class ProfileHeaderView: UIView {
         
         self.addSubview(avatarImage)
         self.addSubview(labelStackView)
-        
-//        self.addSubview(textField)
-//        self.addSubview(showButton)
-//        self.addSubview(favorites)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
         labelStackView.addArrangedSubview(textField)
