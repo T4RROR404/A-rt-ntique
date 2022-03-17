@@ -68,10 +68,10 @@ class ProfileViewController: UIViewController {
     
     private lazy var exitButton: UIButton = {
         let exitButton = UIButton()
-        exitButton.setTitle("exit", for: .normal)
+        exitButton.setTitle("X", for: .normal)
         exitButton.addTarget(self, action: #selector(exitPressed), for: .touchUpInside)
         exitButton.backgroundColor = .gray
-        exitButton.layer.cornerRadius = 7
+        exitButton.layer.cornerRadius = 10
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         return exitButton
     }()
@@ -111,7 +111,7 @@ class ProfileViewController: UIViewController {
             
             constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 60))
             constraints.append(exitButton.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -580))
-            constraints.append(exitButton.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 310))
+            constraints.append(exitButton.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 325))
             constraints.append(exitButton.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
             
             constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 100))
