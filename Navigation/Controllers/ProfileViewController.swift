@@ -78,8 +78,9 @@ class ProfileViewController: UIViewController {
     
     @objc func exitPressed() {
         profileView.avatarImage.alpha = 1
-        UIView.animate(withDuration: 2) {
-            self.avatarView.isHidden = true
+        UIView.animate(withDuration: 1) {
+            self.avatarView.alpha = 0
+            
         }
     }
     
@@ -95,7 +96,7 @@ class ProfileViewController: UIViewController {
     
         @objc func onTapScreen() {
             
-            UIView.animate(withDuration: 2) {
+            UIView.animate(withDuration: 1) {
                 self.profileView.avatarImage.alpha = 0
                 self.avatarView.isHidden = false
                 self.avatarView.alpha = 0.9
