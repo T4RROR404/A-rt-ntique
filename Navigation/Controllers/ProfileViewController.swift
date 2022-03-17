@@ -10,6 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let profileView = ProfileHeaderView()
+    let postTableView = PostTableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class ProfileViewController: UIViewController {
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         return avatarView
     }()
-    
+        
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -94,38 +95,38 @@ class ProfileViewController: UIViewController {
         return descriptionAvatar
     }()
     
-        @objc func onTapScreen() {
-            
-            UIView.animate(withDuration: 1) {
-                self.profileView.avatarImage.alpha = 0
-                self.avatarView.isHidden = false
-                self.avatarView.alpha = 0.9
-            }
-            
-            avatarView.addSubview(exitButton)
-            avatarView.addSubview(avatarImage)
-            avatarView.addSubview(descriptionAvatar)
-            
-            
-            var constraints = [NSLayoutConstraint] ()
-            
-            constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 60))
-            constraints.append(exitButton.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -580))
-            constraints.append(exitButton.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 325))
-            constraints.append(exitButton.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
-            
-            constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 100))
-            constraints.append(avatarImage.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -280))
-            constraints.append(avatarImage.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 100))
-            constraints.append(avatarImage.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -100))
-            
-            constraints.append(descriptionAvatar.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 20))
-            constraints.append(descriptionAvatar.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -10))
-            constraints.append(descriptionAvatar.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 30))
-            constraints.append(descriptionAvatar.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
-            
-            NSLayoutConstraint.activate(constraints)
+    @objc func onTapScreen() {
+        
+        UIView.animate(withDuration: 1) {
+            self.profileView.avatarImage.alpha = 0
+            self.avatarView.isHidden = false
+            self.avatarView.alpha = 0.9
         }
+        
+        avatarView.addSubview(exitButton)
+        avatarView.addSubview(avatarImage)
+        avatarView.addSubview(descriptionAvatar)
+        
+        
+        var constraints = [NSLayoutConstraint] ()
+        
+        constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 60))
+        constraints.append(exitButton.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -580))
+        constraints.append(exitButton.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 325))
+        constraints.append(exitButton.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
+        
+        constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 100))
+        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -280))
+        constraints.append(avatarImage.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 100))
+        constraints.append(avatarImage.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -100))
+        
+        constraints.append(descriptionAvatar.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 20))
+        constraints.append(descriptionAvatar.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -10))
+        constraints.append(descriptionAvatar.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 30))
+        constraints.append(descriptionAvatar.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
+        
+        NSLayoutConstraint.activate(constraints)
+    }
     
     var posts: [PostView] = []
     var photos = PhotoView(photoName1: Photos.photo1!, photoName2: Photos.photo2!, photoName3: Photos.photo3!, photoName4: Photos.photo4!)
@@ -143,10 +144,12 @@ class ProfileViewController: UIViewController {
         
         view.addSubview(scrollView)
         view.addSubview(avatarView)
+        view.addSubview(postTableView)
         scrollView.addSubview(self.contentView)
         contentView.addSubview(self.stackView)
         
         profileView.translatesAutoresizingMaskIntoConstraints = false
+        postTableView.translatesAutoresizingMaskIntoConstraints = false
         
         posts = fetchData()
         let tabelView = UITableView()
@@ -162,6 +165,12 @@ class ProfileViewController: UIViewController {
         self.stackView.addArrangedSubview(tabelView)
     
         var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+        constraints.append(postTableView.rightAnchor.constraint(equalTo: view.rightAnchor))
+        constraints.append(postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(postTableView.leftAnchor.constraint(equalTo: view.leftAnchor))
+        constraints.append(postTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
         constraints.append(avatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
         constraints.append(avatarView.rightAnchor.constraint(equalTo: view.rightAnchor))

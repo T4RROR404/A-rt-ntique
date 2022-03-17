@@ -64,8 +64,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let photosViewController = PhotosViewController()
             navigationController?.pushViewController(photosViewController, animated: true)
             
+        } else if indexPath.row >= 3 {
+            
+            UIView.animate(withDuration: 1) {
+                
+                self.postTableView.isHidden = false
+                self.postTableView.alpha = 0.95
+                let post = self.posts[indexPath.row - 3]
+                self.postTableView.set(post: post)
+            }
         }
     }
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 1 {

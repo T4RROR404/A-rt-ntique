@@ -9,7 +9,7 @@ import UIKit
 
 class PostHeaderViewCell: UITableViewCell {
     
-    private lazy var authorPost: UILabel = {
+    lazy var authorPost: UILabel = {
         let authorPost = UILabel()
         authorPost.numberOfLines = 0
         authorPost.font = .systemFont(ofSize: 20, weight: .bold)
@@ -20,13 +20,13 @@ class PostHeaderViewCell: UITableViewCell {
         return authorPost
     }()
     
-    private lazy var imagePost: UIImageView = {
+    lazy var imagePost: UIImageView = {
         let imagePost = UIImageView()
         imagePost.translatesAutoresizingMaskIntoConstraints = false
         return imagePost
     }()
     
-    private lazy var descriptionPost: UILabel = {
+    lazy var descriptionPost: UILabel = {
         let descriptionPost = UILabel()
         descriptionPost.font = .systemFont(ofSize: 12, weight: .light)
         descriptionPost.numberOfLines = 10
@@ -35,19 +35,19 @@ class PostHeaderViewCell: UITableViewCell {
         return descriptionPost
     }()
     
-    private lazy var likesPost: UILabel = {
+    lazy var likesPost: UILabel = {
         let likesPost = UILabel()
         likesPost.translatesAutoresizingMaskIntoConstraints = false
         return likesPost
     }()
     
-    private lazy var viewsPost: UILabel = {
+    lazy var viewsPost: UILabel = {
         let viewsPost = UILabel()
         viewsPost.translatesAutoresizingMaskIntoConstraints = false
         return viewsPost
     }()
 
-    private lazy var stackView: UIStackView = {
+    lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -104,8 +104,8 @@ struct PostView {
     let author: String
     let description: String
     let imageName:UIImage
-    let price: Int
-    let views: Int
+    var price: Int
+    var views: Int
 }
 
 struct Images {
