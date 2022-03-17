@@ -95,6 +95,12 @@ class ProfileViewController: UIViewController {
     
         @objc func onTapScreen() {
             
+            UIView.animate(withDuration: 2) {
+                self.profileView.avatarImage.alpha = 0
+                self.avatarView.isHidden = false
+                self.avatarView.alpha = 0.9
+            }
+            
             avatarView.addSubview(exitButton)
             avatarView.addSubview(avatarImage)
             avatarView.addSubview(descriptionAvatar)
@@ -118,13 +124,6 @@ class ProfileViewController: UIViewController {
             constraints.append(descriptionAvatar.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
             
             NSLayoutConstraint.activate(constraints)
-            
-            UIView.animate(withDuration: 2) {
-                self.profileView.avatarImage.alpha = 0
-                self.avatarView.isHidden = false
-                self.avatarView.alpha = 0.9
-                
-            }
         }
     
     var posts: [PostView] = []
