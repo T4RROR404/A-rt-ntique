@@ -41,7 +41,7 @@ class PostTableView: UIView {
         return likes
     }()
     
-    private lazy var views: UILabel = {
+    lazy var views: UILabel = {
         let views = UILabel()
         views.translatesAutoresizingMaskIntoConstraints = false
         return views
@@ -67,9 +67,13 @@ class PostTableView: UIView {
     }()
     
     @objc func exitPress() {
+        
+        let postViewCell = PostHeaderViewCell()
 
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.alpha = 0
+            postViewCell.viewsPost.text = "test"
+            
         }
     }
 
@@ -77,7 +81,7 @@ class PostTableView: UIView {
         super.init(frame: frame)
         configureTableView()
         self.backgroundColor = .white
-        self.isHidden = true
+//        self.isHidden = true
         self.alpha = 0
     }
     
@@ -89,7 +93,7 @@ class PostTableView: UIView {
         author.text = post.author
         image.image = post.imageName
         descriptionV.text = post.description
-        likes.text = "\(post.views) Views                                           \(post.price) $"
+        likes.text = "Views: \(post.views + 1)                                         \(post.price) $"
 //        viewsPost.text = "\(post.views) Views"
     }
     

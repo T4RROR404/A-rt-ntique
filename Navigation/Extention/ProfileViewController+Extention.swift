@@ -66,7 +66,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.row >= 3 {
             
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 0.5) {
                 
                 self.postTableView.isHidden = false
                 self.postTableView.alpha = 0.95

@@ -29,7 +29,7 @@ class PostHeaderViewCell: UITableViewCell {
     lazy var descriptionPost: UILabel = {
         let descriptionPost = UILabel()
         descriptionPost.font = .systemFont(ofSize: 12, weight: .light)
-        descriptionPost.numberOfLines = 10
+        descriptionPost.numberOfLines = 2
         descriptionPost.textAlignment = .center
         descriptionPost.translatesAutoresizingMaskIntoConstraints = false
         return descriptionPost

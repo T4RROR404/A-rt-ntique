@@ -36,7 +36,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var photoStackView: UIStackView = {
         let photoStackView = UIStackView()
         photoStackView.axis = .horizontal
-        photoStackView.spacing = 20
+        photoStackView.spacing = 25
         photoStackView.translatesAutoresizingMaskIntoConstraints = false
         return photoStackView
     }()
@@ -64,15 +64,14 @@ class PhotosTableViewCell: UITableViewCell {
         constraints.append(photoStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
         constraints.append(photoStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
         constraints.append(photoStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20))
-                
-        NSLayoutConstraint.activate(constraints)
         
         for views in photoStackView.arrangedSubviews {
-            views.heightAnchor.constraint(equalToConstant: 66).isActive = true
-            views.widthAnchor.constraint(equalToConstant: 70).isActive = true
-            views.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            constraints.append(views.heightAnchor.constraint(equalToConstant: 66))
+            constraints.append(views.widthAnchor.constraint(equalToConstant: 70))
+//            views.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         }
         
+        NSLayoutConstraint.activate(constraints)        
     }
     
     func set4photo(photo: PhotoView) {
