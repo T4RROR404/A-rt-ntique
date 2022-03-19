@@ -111,17 +111,17 @@ class ProfileViewController: UIViewController {
         var constraints = [NSLayoutConstraint] ()
         
         constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 80))
-        constraints.append(exitButton.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -735))
-        constraints.append(exitButton.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 325))
+        constraints.append(exitButton.bottomAnchor.constraint(greaterThanOrEqualTo: avatarView.bottomAnchor, constant: -735))
+        constraints.append(exitButton.leadingAnchor.constraint(lessThanOrEqualTo: avatarView.leadingAnchor, constant: 325))
         constraints.append(exitButton.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
         
         constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 150))
-        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -400))
+        constraints.append(avatarImage.bottomAnchor.constraint(greaterThanOrEqualTo: avatarView.bottomAnchor, constant: -400))
         constraints.append(avatarImage.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 100))
         constraints.append(avatarImage.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -100))
         
-        constraints.append(descriptionAvatar.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 20))
-        constraints.append(descriptionAvatar.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -10))
+        constraints.append(descriptionAvatar.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 30))
+        constraints.append(descriptionAvatar.bottomAnchor.constraint(lessThanOrEqualTo: avatarView.bottomAnchor, constant: -10))
         constraints.append(descriptionAvatar.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 30))
         constraints.append(descriptionAvatar.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
         
@@ -182,7 +182,7 @@ class ProfileViewController: UIViewController {
         constraints.append(scrollView.rightAnchor.constraint(equalTo: view.rightAnchor))
         constraints.append(scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
         constraints.append(scrollView.leftAnchor.constraint(equalTo: view.leftAnchor))
-        constraints.append(scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
+//        constraints.append(scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
 
         constraints.append(contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
         constraints.append(contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
@@ -193,7 +193,7 @@ class ProfileViewController: UIViewController {
         constraints.append(self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor))
         constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
         constraints.append(self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor))
-        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor))
+//        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor))
         
         NSLayoutConstraint.activate(constraints)
         
@@ -201,8 +201,8 @@ class ProfileViewController: UIViewController {
         for view in self.stackView.arrangedSubviews {
 
             NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(equalToConstant: 680),
-                view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+                view.heightAnchor.constraint(greaterThanOrEqualToConstant: 740),
+                view.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor)
             ])
         }
     }
