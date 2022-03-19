@@ -62,8 +62,8 @@ class PhotosTableViewCell: UITableViewCell {
         
         constraints.append(photoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20))
         constraints.append(photoStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
-        constraints.append(photoStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
-        constraints.append(photoStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20))
+//        constraints.append(photoStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10))
+        constraints.append(photoStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -20))
         
         for views in photoStackView.arrangedSubviews {
             constraints.append(views.heightAnchor.constraint(equalToConstant: 66))

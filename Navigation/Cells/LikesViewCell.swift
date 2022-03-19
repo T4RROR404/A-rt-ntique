@@ -37,11 +37,10 @@ class LikesViewCell: UITableViewCell {
         
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(likes.topAnchor.constraint(equalTo: self.topAnchor))
+        constraints.append(likes.topAnchor.constraint(equalTo: self.topAnchor, constant: 2))
         constraints.append(likes.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30))
+        constraints.append(likes.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30))
         constraints.append(likes.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5))
-        constraints.append(likes.widthAnchor.constraint(equalToConstant: 250))
-        constraints.append(likes.heightAnchor.constraint(equalToConstant: 30))
 
         NSLayoutConstraint.activate(constraints)
     }
