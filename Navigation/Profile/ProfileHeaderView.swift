@@ -138,20 +138,20 @@ class ProfileHeaderView: UIView {
         
         constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
         constraints.append(avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
-        constraints.append(avatarImage.trailingAnchor.constraint(lessThanOrEqualTo: labelStackView.leadingAnchor, constant: -25))
+        constraints.append(avatarImage.trailingAnchor.constraint(equalTo: labelStackView.leadingAnchor, constant: -20))
         constraints.append(avatarImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25))
         
         constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20))
-        constraints.append(labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50))
+        constraints.append(labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30))
 //        constraints.append(labelStackView.widthAnchor.constraint(equalToConstant: 180))
         constraints.append(labelStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25))
         
-        for _ in self.labelStackView.arrangedSubviews {
-
-            NSLayoutConstraint.activate([
-                textField.widthAnchor.constraint(equalToConstant: 170)
-            ])
-        }
+//        for _ in self.labelStackView.arrangedSubviews {
+//
+//            NSLayoutConstraint.activate([
+//                textField.widthAnchor.constraint(equalToConstant: 170)
+//            ])
+//        }
 
         NSLayoutConstraint.activate(constraints)
     }

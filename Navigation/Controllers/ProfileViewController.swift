@@ -110,13 +110,13 @@ class ProfileViewController: UIViewController {
         
         var constraints = [NSLayoutConstraint] ()
         
-        constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 60))
-        constraints.append(exitButton.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -580))
+        constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 80))
+        constraints.append(exitButton.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -735))
         constraints.append(exitButton.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 325))
         constraints.append(exitButton.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
         
-        constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 100))
-        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -280))
+        constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 150))
+        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: -400))
         constraints.append(avatarImage.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 100))
         constraints.append(avatarImage.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -100))
         
@@ -166,15 +166,15 @@ class ProfileViewController: UIViewController {
     
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+        constraints.append(postTableView.topAnchor.constraint(equalTo: view.topAnchor))
         constraints.append(postTableView.rightAnchor.constraint(equalTo: view.rightAnchor))
         constraints.append(postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
         constraints.append(postTableView.leftAnchor.constraint(equalTo: view.leftAnchor))
         constraints.append(postTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
-        constraints.append(avatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+        constraints.append(avatarView.topAnchor.constraint(equalTo: view.topAnchor))
         constraints.append(avatarView.rightAnchor.constraint(equalTo: view.rightAnchor))
-        constraints.append(avatarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(avatarView.bottomAnchor.constraint(equalTo: view.bottomAnchor))
         constraints.append(avatarView.leftAnchor.constraint(equalTo: view.leftAnchor))
         constraints.append(avatarView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
@@ -199,7 +199,7 @@ class ProfileViewController: UIViewController {
         
         
         for view in self.stackView.arrangedSubviews {
-            
+
             NSLayoutConstraint.activate([
                 view.heightAnchor.constraint(equalToConstant: 680),
                 view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
