@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         addConstraint()
+        self.navigationController?.isNavigationBarHidden = true
 //        self.tabBarController?.tabBar.isHidden = true
 
     }
@@ -90,7 +91,7 @@ class LoginViewController: UIViewController {
     
     @objc func buttonPressed() {
         let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+        navigationController?.pushViewController(profileViewController, animated: true)        
     }
     
     private lazy var fieldStackView: UIStackView = {
@@ -149,13 +150,13 @@ class LoginViewController: UIViewController {
 
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(scrollFieldView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: -12))
+        constraints.append(scrollFieldView.topAnchor.constraint(equalTo: logoImage.bottomAnchor))
         constraints.append(scrollFieldView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
         constraints.append(scrollFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor))
         constraints.append(scrollFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor))
         constraints.append(scrollFieldView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
-        constraints.append(fieldStackView.topAnchor.constraint(equalTo: scrollFieldView.topAnchor, constant: 110))
+        constraints.append(fieldStackView.topAnchor.constraint(equalTo: scrollFieldView.topAnchor, constant: 120))
         constraints.append(fieldStackView.centerXAnchor.constraint(equalTo: scrollFieldView.centerXAnchor))
         let leadingStackConstraint = fieldStackView.leadingAnchor.constraint(equalTo: scrollFieldView.leadingAnchor)
         let trailingStackConstraint = fieldStackView.trailingAnchor.constraint(equalTo: scrollFieldView.trailingAnchor)
@@ -167,9 +168,9 @@ class LoginViewController: UIViewController {
         constraints.append(logoImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor))
         constraints.append(logoImage.widthAnchor.constraint(equalToConstant: 230))
         constraints.append(logoImage.heightAnchor.constraint(equalToConstant: 230))
-        constraints.append(logoImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20))
+        constraints.append(logoImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 58))
         
-        constraints.append(loginButton.topAnchor.constraint(equalTo: self.fieldStackView.bottomAnchor, constant: 30))
+        constraints.append(loginButton.topAnchor.constraint(equalTo: self.fieldStackView.bottomAnchor, constant: 50))
         constraints.append(loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor))
         constraints.append(loginButton.widthAnchor.constraint(equalToConstant: 150))
         constraints.append(loginButton.heightAnchor.constraint(equalToConstant: 50))
