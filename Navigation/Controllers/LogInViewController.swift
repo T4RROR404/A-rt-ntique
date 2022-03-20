@@ -73,6 +73,7 @@ class LoginViewController: UIViewController {
     let logoImage: UIImageView = {
         let logo = UIImage(named: "logo")
         let logoImage = UIImageView(image: logo)
+        logoImage.layer.cornerRadius = 7
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         return logoImage
     } ()

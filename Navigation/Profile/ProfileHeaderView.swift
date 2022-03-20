@@ -20,23 +20,56 @@ class ProfileHeaderView: UIView {
         super.init(coder: coder)
     }
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .white
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = .white
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 30
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var name: UILabel = {
         let name = UILabel()
         name.text = "K1LL B1LL"
         name.font = .systemFont(ofSize: 35, weight: .bold)
         name.adjustsFontSizeToFitWidth = true
         name.minimumScaleFactor = 0.5
-        self.addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
     }()
     
+    private lazy var favorites: UILabel = {
+        let favorites = UILabel()
+        favorites.text = "My Loots:"
+        favorites.font = .systemFont(ofSize: 20, weight: .light)
+        favorites.adjustsFontSizeToFitWidth = true
+        favorites.minimumScaleFactor = 0.5
+        favorites.translatesAutoresizingMaskIntoConstraints = false
+        return favorites
+    }()
+    
     private lazy var status: UITextView = {
         let status = UITextView()
-        status.backgroundColor = .systemGray2
+        status.backgroundColor = .systemGray4
         status.font = .systemFont(ofSize: 20)
         status.textColor = .systemGray
-        status.text = "status"
+        status.text = " status"
+        status.layer.cornerRadius = 5
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
@@ -50,7 +83,7 @@ class ProfileHeaderView: UIView {
         textField.autocapitalizationType = .words
         textField.font = .systemFont(ofSize: 15)
         textField.textColor = .systemGray2
-        textField.backgroundColor = .systemGray4
+        textField.backgroundColor = .systemGray5
         textField.borderStyle = .roundedRect
         textField.returnKeyType = .next
         textField.keyboardType = .default
@@ -74,18 +107,22 @@ class ProfileHeaderView: UIView {
         return showButton
     }()
     
-    private lazy var newButton: UIButton = {
-        let newButton = UIButton()
-        newButton.setTitle("edit profile", for: .normal)
-        newButton.backgroundColor = .gray
-        newButton.layer.cornerRadius = 7
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        return newButton
-    }()
+//    private lazy var newButton: UIButton = {
+//        let newButton = UIButton()
+//        newButton.setTitle("edit profile", for: .normal)
+//        newButton.backgroundColor = .gray
+//        newButton.layer.cornerRadius = 7
+//        newButton.translatesAutoresizingMaskIntoConstraints = false
+//        return newButton
+//    }()
 
     let avatarImage: UIImageView = {
         let portrait = UIImage(named: "portrait")
         let avatarImage = UIImageView(image: portrait)
+        avatarImage.layer.shadowColor = UIColor.black.cgColor
+        avatarImage.layer.shadowOffset = CGSize(width: 10, height: 10)
+        avatarImage.layer.shadowRadius = 20
+        avatarImage.layer.shadowOpacity = 0.3
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
         return avatarImage
     } ()
@@ -118,6 +155,11 @@ class ProfileHeaderView: UIView {
         labelstackView.translatesAutoresizingMaskIntoConstraints = false
         return labelstackView
     }()
+    
+    var posts: [PostView] = []
+    struct Cells {
+        static let postCell = "PostTableViewCell"
+    }
 
     private func addConstraints() {
         
@@ -125,11 +167,29 @@ class ProfileHeaderView: UIView {
         self.addSubview(avatarImage)
         self.addSubview(textField)
         self.addSubview(showButton)
-        self.addSubview(newButton)
+//        self.addSubview(newButton)
+        self.addSubview(favorites)
+        self.addSubview(scrollView)
+        scrollView.addSubview(self.contentView)
+        contentView.addSubview(self.stackView)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
-
+        
+        posts = fetchData()
+        let tabelView = UITableView()
+        tabelView.delegate = self
+        tabelView.dataSource = self
+        tabelView.layer.cornerRadius = 10
+        tabelView.estimatedRowHeight = 150
+        tabelView.register(ProfileHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
+        self.stackView.addArrangedSubview(tabelView)
+        
         var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(favorites.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 80))
+        constraints.append(favorites.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30))
+        constraints.append(favorites.widthAnchor.constraint(equalToConstant: 250))
+        constraints.append(favorites.heightAnchor.constraint(equalToConstant: 60))
         
         constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
         constraints.append(avatarImage.leadingAnchor.constraint(greaterThanOrEqualTo: self.leadingAnchor, constant: 20))
@@ -143,7 +203,7 @@ class ProfileHeaderView: UIView {
         
         constraints.append(textField.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
         constraints.append(textField.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 30))
-        constraints.append(textField.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -30))
+        constraints.append(textField.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -45))
         constraints.append(textField.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 350))
         
         constraints.append(showButton.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20))
@@ -153,13 +213,36 @@ class ProfileHeaderView: UIView {
         constraints.append(showButton.heightAnchor.constraint(equalToConstant: 50))
         constraints.append(showButton.widthAnchor.constraint(equalToConstant: 160))
         
-        
-        constraints.append(newButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 130))
-        constraints.append(newButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -130))
-        constraints.append(newButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 470))
+        constraints.append(self.scrollView.rightAnchor.constraint(equalTo: self.rightAnchor))
+        constraints.append(self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor))
+        constraints.append(self.scrollView.leftAnchor.constraint(equalTo: self.leftAnchor))
+        constraints.append(self.scrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
 
+        constraints.append(self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
+        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor))
+        constraints.append(self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
+        constraints.append(self.contentView.widthAnchor.constraint(equalToConstant: 320))
+        constraints.append(self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
+
+        constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
+        constraints.append(self.stackView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor))
+        constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
+        constraints.append(self.stackView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor))
+        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
         
-    
+//        constraints.append(newButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 130))
+//        constraints.append(newButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -130))
+//        constraints.append(newButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor))
+
         NSLayoutConstraint.activate(constraints)
+        
+        for view in self.stackView.arrangedSubviews {
+            
+            NSLayoutConstraint.activate([
+                view.heightAnchor.constraint(equalToConstant: 390),
+                view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            ])
+        }
     }
 }

@@ -12,18 +12,24 @@ class ProfileViewController: UIViewController {
     private let profileHeaderView: UIView = {
         let profileHearderView = ProfileHeaderView()
         profileHearderView.translatesAutoresizingMaskIntoConstraints = false
-        profileHearderView.backgroundColor = .lightGray
+        profileHearderView.backgroundColor = .white
         return profileHearderView
     } ()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
-        view.addSubview(profileHeaderView)
-        addConstraints()
+        configureSubviews()
+        setupConstraints()
     }
     
-    private func addConstraints() {
+    private func configureSubviews() {
+        
+        view.addSubview(profileHeaderView)
+    }
+        
+    private func setupConstraints() {
+        
         var constraints = [NSLayoutConstraint]()
         
         constraints.append(profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor))
