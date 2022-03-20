@@ -12,9 +12,8 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray4
-        let myPost = Post()
         let titleLabel = UILabel()
-        titleLabel.text = myPost.title
+        titleLabel.text = "Post"
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
         let infoImage = UIImage(named: "info")

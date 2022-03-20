@@ -12,13 +12,8 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Feed"
+        title = "Loots"
         addConstraint()
-    }
-    
-    @objc func buttonClicked() {
-        let postViewController = PostViewController()
-        navigationController?.pushViewController(postViewController, animated: true)
     }
     
     private lazy var postButton1: UIButton = {
