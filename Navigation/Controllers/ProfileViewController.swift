@@ -62,7 +62,6 @@ class ProfileViewController: UIViewController {
         avatarImage.layer.shadowOffset = CGSize(width: 10, height: 10)
         avatarImage.layer.shadowRadius = 10
         avatarImage.layer.shadowOpacity = 0.3
-        avatarImage.isUserInteractionEnabled = true
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
         return avatarImage
     } ()
@@ -111,17 +110,18 @@ class ProfileViewController: UIViewController {
         var constraints = [NSLayoutConstraint] ()
         
         constraints.append(exitButton.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 80))
-        constraints.append(exitButton.bottomAnchor.constraint(greaterThanOrEqualTo: avatarView.bottomAnchor, constant: -735))
-        constraints.append(exitButton.leadingAnchor.constraint(lessThanOrEqualTo: avatarView.leadingAnchor, constant: 325))
         constraints.append(exitButton.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
+        constraints.append(exitButton.heightAnchor.constraint(equalToConstant: 30))
+        constraints.append(exitButton.widthAnchor.constraint(equalToConstant: 30))
         
-        constraints.append(avatarImage.topAnchor.constraint(equalTo: avatarView.topAnchor, constant: 150))
-        constraints.append(avatarImage.bottomAnchor.constraint(greaterThanOrEqualTo: avatarView.bottomAnchor, constant: -400))
-        constraints.append(avatarImage.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 100))
-        constraints.append(avatarImage.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -100))
+        constraints.append(avatarImage.topAnchor.constraint(equalTo: exitButton.bottomAnchor, constant: 30))
+        constraints.append(avatarImage.leadingAnchor.constraint(lessThanOrEqualTo: avatarView.leadingAnchor, constant: 150))
+        constraints.append(avatarImage.trailingAnchor.constraint(greaterThanOrEqualTo: avatarView.trailingAnchor, constant: -150))
+        constraints.append(avatarImage.heightAnchor.constraint(lessThanOrEqualToConstant: 350))
+        constraints.append(avatarImage.centerXAnchor.constraint(equalTo: avatarView.centerXAnchor))
         
-        constraints.append(descriptionAvatar.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 30))
-        constraints.append(descriptionAvatar.bottomAnchor.constraint(lessThanOrEqualTo: avatarView.bottomAnchor, constant: -10))
+        constraints.append(descriptionAvatar.topAnchor.constraint(equalTo: avatarImage.bottomAnchor, constant: 20))
+        constraints.append(descriptionAvatar.bottomAnchor.constraint(lessThanOrEqualTo: avatarView.safeAreaLayoutGuide.bottomAnchor, constant: -20))
         constraints.append(descriptionAvatar.leadingAnchor.constraint(equalTo: avatarView.leadingAnchor, constant: 30))
         constraints.append(descriptionAvatar.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: -30))
         
@@ -193,7 +193,6 @@ class ProfileViewController: UIViewController {
         constraints.append(self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor))
         constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
         constraints.append(self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor))
-//        constraints.append(self.stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor))
         
         NSLayoutConstraint.activate(constraints)
         

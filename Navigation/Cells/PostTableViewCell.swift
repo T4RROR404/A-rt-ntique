@@ -46,7 +46,15 @@ class PostHeaderViewCell: UITableViewCell {
         viewsPost.translatesAutoresizingMaskIntoConstraints = false
         return viewsPost
     }()
-
+    
+    lazy var labelStackView: UIStackView = {
+        let labelStackView = UIStackView()
+        labelStackView.axis = .horizontal
+        labelStackView.spacing = 20
+        labelStackView.translatesAutoresizingMaskIntoConstraints = false
+        return labelStackView
+    }()
+    
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -69,8 +77,8 @@ class PostHeaderViewCell: UITableViewCell {
         authorPost.text = post.author
         imagePost.image = post.imageName
         descriptionPost.text = post.description
-        likesPost.text = "\(post.views) Views                                           \(post.price) $"
-//        viewsPost.text = "\(post.views) Views"
+        likesPost.text = "\(post.price) $"
+        viewsPost.text = "\(post.views) Views"
     }
     
     private func configureTableView() {
@@ -81,19 +89,19 @@ class PostHeaderViewCell: UITableViewCell {
         stackView.addArrangedSubview(authorPost)
         stackView.addArrangedSubview(imagePost)
         stackView.addArrangedSubview(descriptionPost)
-        stackView.addArrangedSubview(likesPost)
-        stackView.addArrangedSubview(viewsPost)
+        stackView.addArrangedSubview(labelStackView)
+        labelStackView.addArrangedSubview(viewsPost)
+        labelStackView.addArrangedSubview(likesPost)
         
-//        constraints.append(stackView.centerYAnchor.constraint(equalTo: centerYAnchor))
         constraints.append(stackView.centerXAnchor.constraint(equalTo: centerXAnchor))
         constraints.append(stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10))
-        constraints.append(stackView.bottomAnchor.constraint(equalTo: bottomAnchor))
+        constraints.append(stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10))
         constraints.append(stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
         constraints.append(stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
         constraints.append(imagePost.heightAnchor.constraint(equalToConstant: 350))
         
         for views in stackView.arrangedSubviews {
-            views.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
+            constraints.append(views.centerXAnchor.constraint(equalTo: stackView.centerXAnchor))
         }
                 
         NSLayoutConstraint.activate(constraints)
