@@ -77,8 +77,8 @@ class PostHeaderViewCell: UITableViewCell {
         authorPost.text = post.author
         imagePost.image = post.imageName
         descriptionPost.text = post.description
-        likesPost.text = "\(post.price) $"
-        viewsPost.text = "\(post.views) Views"
+        likesPost.text = "\(post.price) ♡"
+        viewsPost.text = "\(post.views) ▷"
     }
     
     private func configureTableView() {
@@ -90,8 +90,8 @@ class PostHeaderViewCell: UITableViewCell {
         stackView.addArrangedSubview(imagePost)
         stackView.addArrangedSubview(descriptionPost)
         stackView.addArrangedSubview(labelStackView)
-        labelStackView.addArrangedSubview(viewsPost)
         labelStackView.addArrangedSubview(likesPost)
+        labelStackView.addArrangedSubview(viewsPost)
         
         constraints.append(stackView.centerXAnchor.constraint(equalTo: centerXAnchor))
         constraints.append(stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10))

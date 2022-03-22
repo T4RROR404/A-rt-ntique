@@ -93,8 +93,8 @@ class PostTableView: UIView {
         author.text = post.author
         image.image = post.imageName
         descriptionV.text = post.description
-        likes.text = "\(post.price) $"
-        views.text = "\(post.views + 1) Views"
+        likes.text = "\(post.price) ♡"
+        views.text = "\(post.views + 1) ▷"
     }
     
     private func configureTableView() {
