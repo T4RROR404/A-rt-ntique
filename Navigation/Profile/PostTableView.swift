@@ -60,8 +60,8 @@ class PostTableView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.spacing = 20
+//        stackView.alignment = .leading
+//        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -93,8 +93,8 @@ class PostTableView: UIView {
         author.text = post.author
         image.image = post.imageName
         descriptionV.text = post.description
-        likes.text = "Views: \(post.views + 1)                                         \(post.price) $"
-//        viewsPost.text = "\(post.views) Views"
+        likes.text = "\(post.price) $"
+        views.text = "\(post.views + 1) Views"
     }
     
     private func configureTableView() {
@@ -110,17 +110,18 @@ class PostTableView: UIView {
         stackView.addArrangedSubview(views)
         
         constraints.append(exitButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
-        constraints.append(exitButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 325))
         constraints.append(exitButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30))
-        constraints.append(exitButton.bottomAnchor.constraint(equalTo: author.topAnchor, constant: -20))
+        constraints.append(exitButton.heightAnchor.constraint(equalToConstant: 30))
+        constraints.append(exitButton.widthAnchor.constraint(equalToConstant: 30))
         
+        constraints.append(author.topAnchor.constraint(equalTo: exitButton.bottomAnchor, constant: 10))
         constraints.append(author.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
         constraints.append(author.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
-        constraints.append(author.bottomAnchor.constraint(equalTo: image.topAnchor, constant: -30))
+        constraints.append(author.bottomAnchor.constraint(equalTo: image.topAnchor, constant: -10))
         
         constraints.append(image.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
         constraints.append(image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
-        constraints.append(image.heightAnchor.constraint(equalToConstant: 350))
+        constraints.append(image.heightAnchor.constraint(lessThanOrEqualToConstant: 350))
         
         constraints.append(descriptionV.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10))
         constraints.append(descriptionV.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
@@ -129,7 +130,7 @@ class PostTableView: UIView {
         
         constraints.append(stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
         constraints.append(stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
-        constraints.append(stackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 20))
+        constraints.append(stackView.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20))
                 
         NSLayoutConstraint.activate(constraints)
     }

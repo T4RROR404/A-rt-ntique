@@ -36,7 +36,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var photoStackView: UIStackView = {
         let photoStackView = UIStackView()
         photoStackView.axis = .horizontal
-        photoStackView.spacing = 25
+        photoStackView.spacing = 20
         photoStackView.translatesAutoresizingMaskIntoConstraints = false
         return photoStackView
     }()
@@ -61,14 +61,14 @@ class PhotosTableViewCell: UITableViewCell {
         photoStackView.addArrangedSubview(photoTable4)
         
         constraints.append(photoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20))
-        constraints.append(photoStackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 15))
-//        constraints.append(photoStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10))
+        constraints.append(photoStackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20))
+        constraints.append(photoStackView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20))
         constraints.append(photoStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -20))
+        constraints.append(photoStackView.centerXAnchor.constraint(equalTo: centerXAnchor))
         
         for views in photoStackView.arrangedSubviews {
             constraints.append(views.heightAnchor.constraint(equalToConstant: 66))
-            constraints.append(views.widthAnchor.constraint(equalToConstant: 70))
-//            views.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            constraints.append(views.widthAnchor.constraint(lessThanOrEqualToConstant: 70))
         }
         
         NSLayoutConstraint.activate(constraints)        
