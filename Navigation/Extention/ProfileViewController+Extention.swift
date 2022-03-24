@@ -68,10 +68,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             UIView.animate(withDuration: 0.5) {
                 
-                self.postTableView.isHidden = false
-                self.postTableView.alpha = 0.95
+                self.postView.alpha = 0.95
                 let post = self.posts[indexPath.row - 3]
-                self.postTableView.set(post: post)
+                self.postView.set(post: post)
             }
         }
     }

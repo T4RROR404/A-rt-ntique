@@ -9,17 +9,6 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addConstraints()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-        self.addGestureRecognizer(tap)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
     private lazy var name: UILabel = {
         let name = UILabel()
         name.text = "K1LL B1LL"
@@ -74,15 +63,6 @@ class ProfileHeaderView: UIView {
         showButton.translatesAutoresizingMaskIntoConstraints = false
         return showButton
     }()
-    
-//    private lazy var newButton: UIButton = {
-//        let newButton = UIButton()
-//        newButton.setTitle("edit profile", for: .normal)
-//        newButton.backgroundColor = .gray
-//        newButton.layer.cornerRadius = 7
-//        newButton.translatesAutoresizingMaskIntoConstraints = false
-//        return newButton
-//    }()
 
     lazy var avatarImage: UIImageView = {
         let portrait = UIImage(named: "portrait")
@@ -127,6 +107,17 @@ class ProfileHeaderView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addConstraints()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        self.addGestureRecognizer(tap)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 
     private func addConstraints() {
         
