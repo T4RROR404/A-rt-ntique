@@ -10,6 +10,8 @@ import UIKit
 
 class PhotosViewController: UIViewController {
     
+    let photoZoomView = PhotoZoomView()
+    
     private enum Constants {
         static let itemCount: CGFloat = 3
     }
@@ -31,29 +33,8 @@ class PhotosViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-
-    var collectionDataSource : [CollectionViewModel] = [
-        CollectionViewModel(image: "photo1"),
-        CollectionViewModel(image: "photo2"),
-        CollectionViewModel(image: "photo3"),
-        CollectionViewModel(image: "photo4"),
-        CollectionViewModel(image: "photo5"),
-        CollectionViewModel(image: "photo6"),
-        CollectionViewModel(image: "photo7"),
-        CollectionViewModel(image: "photo8"),
-        CollectionViewModel(image: "photo9"),
-        CollectionViewModel(image: "photo10"),
-        CollectionViewModel(image: "photo11"),
-        CollectionViewModel(image: "photo12"),
-        CollectionViewModel(image: "photo13"),
-        CollectionViewModel(image: "photo14"),
-        CollectionViewModel(image: "photo15"),
-        CollectionViewModel(image: "photo16"),
-        CollectionViewModel(image: "photo17"),
-        CollectionViewModel(image: "photo18"),
-        CollectionViewModel(image: "photo19"),
-        CollectionViewModel(image: "photo20")
-    ]
+    
+    var photos: [PhotosView] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,12 +48,23 @@ class PhotosViewController: UIViewController {
     }
     
     private func setupView() {
+        
+        photos = fetchData()
+        
+        photoZoomView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(self.collectionView)
+        view.addSubview(photoZoomView)
+        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            photoZoomView.topAnchor.constraint(equalTo: view.topAnchor),
+            photoZoomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            photoZoomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            photoZoomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     

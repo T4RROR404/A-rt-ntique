@@ -66,6 +66,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.row >= 3 {
             
+            self.posts[indexPath.row - 3].views += 1
+            tableView.reloadRows(at: [indexPath], with: .none)
+            
             UIView.animate(withDuration: 0.5) {
                 
                 self.postView.alpha = 0.95
@@ -81,6 +84,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let photoCell = tableView.dequeueReusableCell(withIdentifier: Cells.photoCell) as! PhotosTableViewCell
             photoCell.selectionStyle = UITableViewCell.SelectionStyle.none
         }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.row != 0 {
+            let deleteAction = UIContextualAction(style: .destructive, title: "delete") {
+                (contextualAction, view, boolValue) in self.posts.remove(at: indexPath.row - 3)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+            return swipeActions
+        }
+        else { return nil }
     }
 }
 
