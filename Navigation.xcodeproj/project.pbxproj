@@ -87,13 +87,20 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		3E10CD2B27ECE77100A9BEE3 /* ZoomView */ = {
+			isa = PBXGroup;
+			children = (
+				3E24D1FA27E3E39300374135 /* PostZoomView.swift */,
+				3EC0FF3327EC8D7D00FC7CC4 /* AvatarZoomView.swift */,
+				3E10CD2727ECBB5300A9BEE3 /* PhotoZoomView.swift */,
+			);
+			path = ZoomView;
+			sourceTree = "<group>";
+		};
 		3E2A04AC27B9641E00EBAF25 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				3E2A04AD27B9643D00EBAF25 /* ProfileHeaderView.swift */,
-				3E24D1FA27E3E39300374135 /* PostZoomView.swift */,
-				3EC0FF3327EC8D7D00FC7CC4 /* AvatarZoomView.swift */,
-				3E10CD2727ECBB5300A9BEE3 /* PhotoZoomView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -117,8 +124,9 @@
 		3E3C089927B2D66900553696 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				3E2A04AC27B9641E00EBAF25 /* Profile */,
 				3EA804F227B6D2F800549187 /* Application */,
+				3E2A04AC27B9641E00EBAF25 /* Profile */,
+				3E10CD2B27ECE77100A9BEE3 /* ZoomView */,
 				3EA804F327B6D31E00549187 /* Controllers */,
 				3ED8518E27C75E36000344B7 /* Extention */,
 				3E10786E27DA648B005CD8A3 /* Cells */,
