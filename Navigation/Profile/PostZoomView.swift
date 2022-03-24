@@ -65,13 +65,9 @@ class PostZoomView: UIView {
     }()
     
     @objc func exitPress() {
-        
-        let postViewCell = PostHeaderViewCell()
 
         UIView.animate(withDuration: 0.5) {
             self.alpha = 0
-            postViewCell.viewsPost.text = "test"
-            
         }
     }
 
@@ -91,7 +87,7 @@ class PostZoomView: UIView {
         image.image = post.imageName
         descriptionV.text = post.description
         likes.text = "\(post.price) ♡"
-        views.text = "\(post.views + 1) ▷"
+        views.text = "\(post.views) ▷"
     }
     
     private func configureTableView() {
