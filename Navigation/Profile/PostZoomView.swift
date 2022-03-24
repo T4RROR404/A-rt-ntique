@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostTableView: UIView {
+class PostZoomView: UIView {
     
     private lazy var author: UILabel = {
         let author = UILabel()
@@ -60,8 +60,6 @@ class PostTableView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-//        stackView.alignment = .leading
-//        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -81,7 +79,6 @@ class PostTableView: UIView {
         super.init(frame: frame)
         configureTableView()
         self.backgroundColor = .white
-//        self.isHidden = true
         self.alpha = 0
     }
     

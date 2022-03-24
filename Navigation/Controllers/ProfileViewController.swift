@@ -10,7 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let profileView = ProfileHeaderView()
-    let postTableView = PostTableView()
+    let postView = PostZoomView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,39 +20,14 @@ class ProfileViewController: UIViewController {
         setupConstraints()
         let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
         profileView.avatarImage.addGestureRecognizer(avatarTap)
-        
     }
-    
-    private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
-    private lazy var contentView: UIView = {
-        let contentView = UIView()
-        contentView.backgroundColor = .white
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        return contentView
-    }()
     
     lazy var avatarView: UIView = {
         let avatarView = UIView()
         avatarView.backgroundColor = .white
         avatarView.alpha = 0
-        avatarView.isHidden = true
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         return avatarView
-    }()
-        
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 30
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
     }()
     
     private lazy var avatarImage: UIImageView = {
@@ -98,7 +73,6 @@ class ProfileViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) {
             self.profileView.avatarImage.alpha = 0
-            self.avatarView.isHidden = false
             self.avatarView.alpha = 0.9
         }
         
@@ -142,14 +116,8 @@ class ProfileViewController: UIViewController {
      
     private func setupConstraints() {
         
-        view.addSubview(scrollView)
-        view.addSubview(avatarView)
-        view.addSubview(postTableView)
-        scrollView.addSubview(self.contentView)
-        contentView.addSubview(self.stackView)
-        
         profileView.translatesAutoresizingMaskIntoConstraints = false
-        postTableView.translatesAutoresizingMaskIntoConstraints = false
+        postView.translatesAutoresizingMaskIntoConstraints = false
         
         posts = fetchData()
         let tabelView = UITableView()
@@ -158,19 +126,23 @@ class ProfileViewController: UIViewController {
         tabelView.layer.cornerRadius = 10
         tabelView.sectionHeaderHeight = 250
         tabelView.estimatedRowHeight = 220
+        tabelView.translatesAutoresizingMaskIntoConstraints = false
         tabelView.register(PostHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
         tabelView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.photoCell)
         tabelView.register(MyLootsViewCell.self, forCellReuseIdentifier: Cells.labelCell)
         tabelView.register(LikesViewCell.self, forCellReuseIdentifier: Cells.likesCell)
-        self.stackView.addArrangedSubview(tabelView)
+
+        view.addSubview(tabelView)
+        view.addSubview(avatarView)
+        view.addSubview(postView)
     
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(postTableView.topAnchor.constraint(equalTo: view.topAnchor))
-        constraints.append(postTableView.rightAnchor.constraint(equalTo: view.rightAnchor))
-        constraints.append(postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
-        constraints.append(postTableView.leftAnchor.constraint(equalTo: view.leftAnchor))
-        constraints.append(postTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
+        constraints.append(postView.topAnchor.constraint(equalTo: view.topAnchor))
+        constraints.append(postView.rightAnchor.constraint(equalTo: view.rightAnchor))
+        constraints.append(postView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(postView.leftAnchor.constraint(equalTo: view.leftAnchor))
+        constraints.append(postView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
         constraints.append(avatarView.topAnchor.constraint(equalTo: view.topAnchor))
         constraints.append(avatarView.rightAnchor.constraint(equalTo: view.rightAnchor))
@@ -178,32 +150,12 @@ class ProfileViewController: UIViewController {
         constraints.append(avatarView.leftAnchor.constraint(equalTo: view.leftAnchor))
         constraints.append(avatarView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
-        constraints.append(scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
-        constraints.append(scrollView.rightAnchor.constraint(equalTo: view.rightAnchor))
-        constraints.append(scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
-        constraints.append(scrollView.leftAnchor.constraint(equalTo: view.leftAnchor))
-//        constraints.append(scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
-
-        constraints.append(contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor))
-        constraints.append(contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor))
-        constraints.append(contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor))
-        constraints.append(contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor))
-
-        constraints.append(self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor))
-        constraints.append(self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor))
-        constraints.append(self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor))
-        constraints.append(self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor))
+        constraints.append(tabelView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+        constraints.append(tabelView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(tabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor))
+        constraints.append(tabelView.trailingAnchor.constraint(equalTo: view.trailingAnchor))
         
         NSLayoutConstraint.activate(constraints)
-        
-        
-        for view in self.stackView.arrangedSubviews {
-
-            NSLayoutConstraint.activate([
-                view.heightAnchor.constraint(greaterThanOrEqualToConstant: 740),
-                view.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor)
-            ])
-        }
     }
 }
 

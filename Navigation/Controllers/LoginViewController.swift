@@ -125,7 +125,7 @@ class LoginViewController: UIViewController {
             if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue)?.cgRectValue {
                 self.scrollFieldView.contentInset.bottom = kbdSize.height + 150
                 let kbdSizeMoove = kbdSize.height
-                self.logoImage.alpha = 0.6
+                self.logoImage.alpha = 0.3
                 self.scrollFieldView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0, bottom: kbdSizeMoove, right: 0)
             }
         }
