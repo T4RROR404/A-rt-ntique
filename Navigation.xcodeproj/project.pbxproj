@@ -28,6 +28,7 @@
 		3EA804FA27B82E6900549187 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804F927B82E6900549187 /* PostViewController.swift */; };
 		3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA804FD27B855FC00549187 /* InfoViewController.swift */; };
 		3EC0FF3427EC8D7D00FC7CC4 /* AvatarZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC0FF3327EC8D7D00FC7CC4 /* AvatarZoomView.swift */; };
+		3EC2D2AC27EDE38900B3EA9A /* ValidationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC2D2AB27EDE38900B3EA9A /* ValidationData.swift */; };
 		3ED8518D27C6A65B000344B7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518C27C6A65B000344B7 /* LoginViewController.swift */; };
 		3ED8519027C75EB5000344B7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */; };
 		3ED8519827CA5233000344B7 /* UIView+extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8519727CA5233000344B7 /* UIView+extention.swift */; };
@@ -58,6 +59,7 @@
 		3EA804F927B82E6900549187 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		3EA804FD27B855FC00549187 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3EC0FF3327EC8D7D00FC7CC4 /* AvatarZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarZoomView.swift; sourceTree = "<group>"; };
+		3EC2D2AB27EDE38900B3EA9A /* ValidationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationData.swift; sourceTree = "<group>"; };
 		3ED8518C27C6A65B000344B7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		3ED8519727CA5233000344B7 /* UIView+extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extention.swift"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				3EA804F327B6D31E00549187 /* Controllers */,
 				3ED8518E27C75E36000344B7 /* Extention */,
 				3E10786E27DA648B005CD8A3 /* Cells */,
+				3EC2D2AA27EDE37400B3EA9A /* Valitation */,
 				3EA804F427B6D36E00549187 /* Resources */,
 			);
 			path = Navigation;
@@ -166,6 +169,14 @@
 				3E3C08A827B2D66900553696 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3EC2D2AA27EDE37400B3EA9A /* Valitation */ = {
+			isa = PBXGroup;
+			children = (
+				3EC2D2AB27EDE38900B3EA9A /* ValidationData.swift */,
+			);
+			path = Valitation;
 			sourceTree = "<group>";
 		};
 		3ED8518E27C75E36000344B7 /* Extention */ = {
@@ -262,6 +273,7 @@
 				3E3C089F27B2D66900553696 /* MainTabBarController.swift in Sources */,
 				3ED8518D27C6A65B000344B7 /* LoginViewController.swift in Sources */,
 				3EC0FF3427EC8D7D00FC7CC4 /* AvatarZoomView.swift in Sources */,
+				3EC2D2AC27EDE38900B3EA9A /* ValidationData.swift in Sources */,
 				3E3C089B27B2D66900553696 /* AppDelegate.swift in Sources */,
 				3EA804FE27B855FC00549187 /* InfoViewController.swift in Sources */,
 				3E85A63127DA0BE200FDAB6E /* PhotoCollectionViewCell.swift in Sources */,
