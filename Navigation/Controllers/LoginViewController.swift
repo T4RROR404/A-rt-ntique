@@ -123,38 +123,38 @@ class LoginViewController: UIViewController {
         guard let password = passwordField.text else {return}
         let enteredLogin = validEmail(login: login)
         let enteredPassword = validPassword(password: password)
-        if login.isEmpty && password.isEmpty {
-            loginField.trigger()
-            passwordField.trigger()
-        } else if login.isEmpty {
-            loginField.trigger()
-        } else if password.isEmpty {
-            passwordField.trigger()
-        } else {
-            if !enteredPassword && !enteredLogin {
-                invalidLabel.text = validationData.invalidEmailAndPassword
-                invalidLabel.isHidden = false
-                passwordField.trigger()
-                loginField.trigger()
-            } else if !enteredPassword {
-                invalidLabel.text = validationData.invalidPassword
-                invalidLabel.isHidden = false
-                passwordField.trigger()
-            } else if !enteredLogin {
-                invalidLabel.text = validationData.invalidEmail
-                invalidLabel.isHidden = false
-                loginField.trigger()
-            } else {
-                if (enteredLogin && enteredPassword) && (loginField.text != validationData.defaultLogin || passwordField.text != validationData.defaultPassword) {
-                    let alert = UIAlertController(title: "Invalid login or password", message: nil, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    present(alert, animated: true, completion: nil)
-                } else {
+//        if login.isEmpty && password.isEmpty {
+//            loginField.trigger()
+//            passwordField.trigger()
+//        } else if login.isEmpty {
+//            loginField.trigger()
+//        } else if password.isEmpty {
+//            passwordField.trigger()
+//        } else {
+//            if !enteredPassword && !enteredLogin {
+//                invalidLabel.text = validationData.invalidEmailAndPassword
+//                invalidLabel.isHidden = false
+//                passwordField.trigger()
+//                loginField.trigger()
+//            } else if !enteredPassword {
+//                invalidLabel.text = validationData.invalidPassword
+//                invalidLabel.isHidden = false
+//                passwordField.trigger()
+//            } else if !enteredLogin {
+//                invalidLabel.text = validationData.invalidEmail
+//                invalidLabel.isHidden = false
+//                loginField.trigger()
+//            } else {
+//                if (enteredLogin && enteredPassword) && (loginField.text != validationData.defaultLogin || passwordField.text != validationData.defaultPassword) {
+//                    let alert = UIAlertController(title: "Invalid login or password", message: nil, preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                    present(alert, animated: true, completion: nil)
+//                } else {
                     navigationController?.pushViewController(profileViewController, animated: true)
                     invalidLabel.isHidden = true
-                }
-            }
-        }
+//                }
+//            }
+//        }
     }
     
     private lazy var fieldStackView: UIStackView = {
@@ -261,6 +261,7 @@ class LoginViewController: UIViewController {
         }
     }
 }
+
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         passwordField.resignFirstResponder()

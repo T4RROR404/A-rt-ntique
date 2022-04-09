@@ -37,12 +37,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        UIView.animate(withDuration: 0.5) {
-            
-            let image = self.photos[indexPath.row]
-            self.photoZoomView.set(image: image)
-            self.photoZoomView.alpha = 1
-        }
+        let photoZoomVC = PhotoZoomVIewController()
+        let image = self.photos[indexPath.row]
+        let navVC = UINavigationController(rootViewController: photoZoomVC)
+        navVC.modalPresentationStyle = .fullScreen
+        navVC.modalTransitionStyle = .crossDissolve
+        photoZoomVC.set(image: image)
+        present(navVC, animated: true)
     }
 }
 

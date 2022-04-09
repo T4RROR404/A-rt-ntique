@@ -10,7 +10,6 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let profileView = ProfileHeaderView()
-    let postView = PostZoomView()
     let avatarView = AvatarZoomView()
     
     override func viewDidLoad() {
@@ -65,19 +64,11 @@ class ProfileViewController: UIViewController {
         
         posts = fetchData()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
-        postView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tabelView)
         view.addSubview(avatarView)
-        view.addSubview(postView)
     
         var constraints = [NSLayoutConstraint]()
-        
-        constraints.append(postView.topAnchor.constraint(equalTo: view.topAnchor))
-        constraints.append(postView.rightAnchor.constraint(equalTo: view.rightAnchor))
-        constraints.append(postView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
-        constraints.append(postView.leftAnchor.constraint(equalTo: view.leftAnchor))
-        constraints.append(postView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
         constraints.append(avatarView.topAnchor.constraint(equalTo: view.topAnchor))
         constraints.append(avatarView.rightAnchor.constraint(equalTo: view.rightAnchor))

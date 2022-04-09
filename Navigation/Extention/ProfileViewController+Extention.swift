@@ -68,13 +68,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.posts[indexPath.row - 3].views += 1
             tableView.reloadRows(at: [indexPath], with: .none)
-            
-            UIView.animate(withDuration: 0.5) {
-                
-                self.postView.alpha = 0.95
-                let post = self.posts[indexPath.row - 3]
-                self.postView.set(post: post)
-            }
+            let postZoomVC = PostZoomViewController()
+            let post = self.posts[indexPath.row - 3]
+            let navVC = UINavigationController(rootViewController: postZoomVC)
+            navVC.modalPresentationStyle = .fullScreen
+            navVC.modalTransitionStyle = .crossDissolve
+            postZoomVC.set(post: post)
+            present(navVC, animated: true)
         }
     }
     

@@ -10,8 +10,6 @@ import UIKit
 
 class PhotosViewController: UIViewController {
     
-    let photoZoomView = PhotoZoomView()
-    
     private enum Constants {
         static let itemCount: CGFloat = 3
     }
@@ -50,21 +48,13 @@ class PhotosViewController: UIViewController {
     private func setupView() {
         
         photos = fetchData()
-        
-        photoZoomView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(self.collectionView)
-        view.addSubview(photoZoomView)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            photoZoomView.topAnchor.constraint(equalTo: view.topAnchor),
-            photoZoomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            photoZoomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            photoZoomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
@@ -74,7 +64,6 @@ class PhotosViewController: UIViewController {
         return CGSize(width: itemWidth, height: itemWidth)
     }
 }
-
 
 struct CollectionViewModel {
     var image:String = ""

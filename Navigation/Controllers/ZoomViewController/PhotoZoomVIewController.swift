@@ -1,14 +1,20 @@
 //
-//  PhotoZoomView.swift
+//  PhotosZoomVIewController.swift
 //  Navigation
 //
-//  Created by insomnia on 24.03.2022.
+//  Created by insomnia on 09.04.2022.
 //
 
 import UIKit
 
-class PhotoZoomView: UIView {
-        
+class PhotoZoomVIewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .black
+        setupView()
+    }
+    
     lazy var photo: UIImageView = {
         let photo = UIImageView()
         photo.translatesAutoresizingMaskIntoConstraints = false
@@ -29,45 +35,28 @@ class PhotoZoomView: UIView {
         
         photo.image = UIImage(named: image.imageName)
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-        self.backgroundColor = .white
-        self.alpha = 0
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
+
     private func setupView() {
 
-        self.addSubview(exitButton)
-        self.addSubview(photo)
+        view.addSubview(exitButton)
+        view.addSubview(photo)
         
         NSLayoutConstraint.activate([
             
-            exitButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
-            exitButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
+            exitButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             exitButton.heightAnchor.constraint(equalToConstant: 40),
             exitButton.widthAnchor.constraint(equalToConstant: 40),
             
-            photo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            photo.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            photo.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            photo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             photo.heightAnchor.constraint(equalToConstant: 400),
             photo.widthAnchor.constraint(equalToConstant: 400)
-
-
         ])
     }
     
     @objc private func exitPressed() {
         
-        UIView.animate(withDuration: 0.5) {
-            self.alpha = 0
-        }
+        dismiss(animated: true)
     }
 }
-
-
