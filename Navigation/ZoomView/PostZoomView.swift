@@ -84,7 +84,7 @@ class PostZoomView: UIView {
     
     func set(post: PostView) {
         author.text = post.author
-        image.image = post.imageName
+        image.image = UIImage(named: post.imageName)
         descriptionV.text = post.description
         likes.text = "\(post.price) ♡"
         views.text = "\(post.views) ▷"

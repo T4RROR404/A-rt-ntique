@@ -32,7 +32,6 @@
 		3ED8518D27C6A65B000344B7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518C27C6A65B000344B7 /* LoginViewController.swift */; };
 		3ED8519027C75EB5000344B7 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */; };
 		3ED8519827CA5233000344B7 /* UIView+extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8519727CA5233000344B7 /* UIView+extention.swift */; };
-		3ED8519A27CB74EF000344B7 /* UIImage+extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8519927CB74EF000344B7 /* UIImage+extention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +62,6 @@
 		3ED8518C27C6A65B000344B7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		3ED8519727CA5233000344B7 /* UIView+extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extention.swift"; sourceTree = "<group>"; };
-		3ED8519927CB74EF000344B7 /* UIImage+extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extention.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +182,6 @@
 			children = (
 				3ED8518F27C75EB5000344B7 /* UIColor+extension.swift */,
 				3ED8519727CA5233000344B7 /* UIView+extention.swift */,
-				3ED8519927CB74EF000344B7 /* UIImage+extention.swift */,
 				3E61211E27CE69F60030CB24 /* ProfileViewController+Extention.swift */,
 				3E85A62E27DA06B600FDAB6E /* PhotosViewController+Extention.swift */,
 			);
@@ -261,7 +258,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ED8519A27CB74EF000344B7 /* UIImage+extention.swift in Sources */,
 				3E83395327D8CDDB00F1F953 /* PhotosViewController.swift in Sources */,
 				3EA804FA27B82E6900549187 /* PostViewController.swift in Sources */,
 				3E10CD2827ECBB5300A9BEE3 /* PhotoZoomView.swift in Sources */,
@@ -441,7 +437,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -468,7 +464,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

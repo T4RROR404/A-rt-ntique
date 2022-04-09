@@ -19,8 +19,14 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = false
         setupConstraints()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        profileView.addGestureRecognizer(tap)
         let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
         profileView.avatarImage.addGestureRecognizer(avatarTap)
+    }
+    
+    @objc func tap(_ sender: Any) {
+        profileView.textField.resignFirstResponder()
     }
     
     private lazy var tabelView: UITableView = {

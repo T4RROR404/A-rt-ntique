@@ -166,13 +166,16 @@ class LoginViewController: UIViewController {
         return fieldStackView
     }()
     
+    private func addTapGestureToHideKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(kbdHide))
-        view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillHideNotification, object: nil)
+        addTapGestureToHideKeyboard()
         loginField.delegate = self
         passwordField.delegate = self
     }
@@ -185,11 +188,13 @@ class LoginViewController: UIViewController {
 
     @objc private func kbdShow(_ notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
-            if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?NSValue)?.cgRectValue {
-                self.scrollFieldView.contentInset.bottom = kbdSize.height + 150
-                let kbdSizeMoove = kbdSize.height
-                self.logoImage.alpha = 0
-                self.scrollFieldView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0, bottom: kbdSizeMoove, right: 0)
+            if let kbdSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = kbdSize.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                let contentOffset: CGPoint = notification.name == UIResponder.keyboardWillHideNotification
+                ? .zero
+                : CGPoint(x: 0, y: keyboardHeight / 2)
+                self.scrollFieldView.contentOffset = contentOffset
             }
         }
     }
@@ -198,8 +203,6 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.scrollFieldView.contentInset.bottom = .zero
             self.scrollFieldView.verticalScrollIndicatorInsets = .zero
-            self.logoImage.alpha = 1
-            self.view.endEditing(true)
         }
     }
     

@@ -75,7 +75,7 @@ class PostHeaderViewCell: UITableViewCell {
     
     func set(post: PostView) {
         authorPost.text = post.author
-        imagePost.image = post.imageName
+        imagePost.image = UIImage(named: post.imageName)
         descriptionPost.text = post.description
         likesPost.text = "\(post.price) ♡"
         viewsPost.text = "\(post.views) ▷"
@@ -111,14 +111,14 @@ class PostHeaderViewCell: UITableViewCell {
 struct PostView {
     let author: String
     let description: String
-    let imageName:UIImage
+    let imageName: String
     var price: Int
     var views: Int
 }
 
-struct Images {
-    static let cryptoPunk = UIImage(named: "cryptoPunk")
-    static let verona = UIImage(named: "verona1909")
-    static let watch = UIImage(named: "watch")
-    static let portraitsGays = UIImage(named: "portraitsGays")
-}
+//struct Images {
+//    static let cryptoPunk = UIImage(named: "cryptoPunk")
+//    static let verona = UIImage(named: "verona1909")
+//    static let watch = UIImage(named: "watch")
+//    static let portraitsGays = UIImage(named: "portraitsGays")
+//}

@@ -27,7 +27,7 @@ class PhotoZoomView: UIView {
     
     func set(image: PhotosView) {
         
-        photo.image = image.imageName
+        photo.image = UIImage(named: image.imageName)
     }
     
     override init(frame: CGRect) {
@@ -55,8 +55,8 @@ class PhotoZoomView: UIView {
             
             photo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             photo.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            photo.heightAnchor.constraint(equalToConstant: 300),
-            photo.widthAnchor.constraint(equalToConstant: 300)
+            photo.heightAnchor.constraint(equalToConstant: 400),
+            photo.widthAnchor.constraint(equalToConstant: 400)
 
 
         ])
