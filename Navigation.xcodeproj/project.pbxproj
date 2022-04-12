@@ -120,7 +120,7 @@
 				3EA804F327B6D31E00549187 /* Controllers */,
 				3ED8518E27C75E36000344B7 /* Extention */,
 				3E10786E27DA648B005CD8A3 /* Cells */,
-				3EC2D2AA27EDE37400B3EA9A /* Valitation */,
+				3EC2D2AA27EDE37400B3EA9A /* Validation */,
 				3EA804F427B6D36E00549187 /* Resources */,
 			);
 			path = Navigation;
@@ -160,12 +160,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		3EC2D2AA27EDE37400B3EA9A /* Valitation */ = {
+		3EC2D2AA27EDE37400B3EA9A /* Validation */ = {
 			isa = PBXGroup;
 			children = (
 				3EC2D2AB27EDE38900B3EA9A /* ValidationData.swift */,
 			);
-			path = Valitation;
+			path = Validation;
 			sourceTree = "<group>";
 		};
 		3ED8518E27C75E36000344B7 /* Extention */ = {

@@ -45,7 +45,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! PostHeaderViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postCell) as! PostTableViewCell
             let post = posts[indexPath.row - 3]
             cell.set(post: post)
             cell.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
@@ -63,9 +63,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 1 {
             let photosViewController = PhotosViewController()
             navigationController?.pushViewController(photosViewController, animated: true)
-            
+
         } else if indexPath.row >= 3 {
-            
+
             self.posts[indexPath.row - 3].views += 1
             tableView.reloadRows(at: [indexPath], with: .none)
             let postZoomVC = PostZoomViewController()

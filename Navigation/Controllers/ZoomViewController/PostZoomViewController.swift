@@ -10,12 +10,6 @@ import UIKit
 
 class PostZoomViewController:UIViewController {
     
-    
-    override func viewDidLoad() {
-        view.backgroundColor = .white
-        configureTableView()    
-    }
-    
     private lazy var author: UILabel = {
         let author = UILabel()
         author.numberOfLines = 0
@@ -44,6 +38,7 @@ class PostZoomViewController:UIViewController {
     
     private lazy var likes: UILabel = {
         let likes = UILabel()
+        likes.isUserInteractionEnabled = true
         likes.translatesAutoresizingMaskIntoConstraints = false
         return likes
     }()
@@ -68,15 +63,23 @@ class PostZoomViewController:UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
-//        stackView.isUserInteractionEnabled = true
+        stackView.isUserInteractionEnabled = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    override func viewDidLoad() {
+        view.backgroundColor = .white
+        configureTableView()
+        setupGesture()
+    }
     
     @objc func exitPress() {
         
         dismiss(animated: true)
     }
+    
+    private let tapGestureRecognizer = UITapGestureRecognizer()
     
     func set(post: PostView) {
         author.text = post.author
@@ -122,6 +125,23 @@ class PostZoomViewController:UIViewController {
         constraints.append(stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20))
                 
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func setupGesture() {
+        self.tapGestureRecognizer.addTarget(self, action: #selector(self.tapLiked(_ :)))
+        self.likes.addGestureRecognizer(self.tapGestureRecognizer)
+    }
+    
+    @objc func tapLiked(_ gestureRecognizer: UITapGestureRecognizer) {
+        
+        let profileCOntroller = ProfileViewController()
+        var posts: [PostView] = []
+        posts = profileCOntroller.fetchData()
+        for i in 0...posts.count - 4 {
+            posts[i].price += 1
+            likes.text = "\(posts[i].price) ♡ "
+            
+        }
     }
 }
 

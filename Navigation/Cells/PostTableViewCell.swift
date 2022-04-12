@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostHeaderViewCell: UITableViewCell {
+class PostTableViewCell: UITableViewCell {
     
     lazy var authorPost: UILabel = {
         let authorPost = UILabel()
@@ -37,6 +37,7 @@ class PostHeaderViewCell: UITableViewCell {
     
     lazy var likesPost: UILabel = {
         let likesPost = UILabel()
+        likesPost.isUserInteractionEnabled = true
         likesPost.translatesAutoresizingMaskIntoConstraints = false
         return likesPost
     }()
@@ -115,10 +116,3 @@ struct PostView {
     var price: Int
     var views: Int
 }
-
-//struct Images {
-//    static let cryptoPunk = UIImage(named: "cryptoPunk")
-//    static let verona = UIImage(named: "verona1909")
-//    static let watch = UIImage(named: "watch")
-//    static let portraitsGays = UIImage(named: "portraitsGays")
-//}

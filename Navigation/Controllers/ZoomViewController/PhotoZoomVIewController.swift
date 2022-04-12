@@ -8,12 +8,6 @@
 import UIKit
 
 class PhotoZoomVIewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .black
-        setupView()
-    }
     
     lazy var photo: UIImageView = {
         let photo = UIImageView()
@@ -30,6 +24,12 @@ class PhotoZoomVIewController: UIViewController {
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         return exitButton
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .black
+        setupView()
+    }
     
     func set(image: PhotosView) {
         

@@ -28,12 +28,12 @@ class ProfileViewController: UIViewController {
         profileView.textField.resignFirstResponder()
     }
     
-    private lazy var tabelView: UITableView = {
+    lazy var tabelView: UITableView = {
         let tabelView = UITableView(frame: .zero, style: .grouped)
         tabelView.delegate = self
         tabelView.dataSource = self
         tabelView.layer.cornerRadius = 10
-        tabelView.register(PostHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
+        tabelView.register(PostTableViewCell.self, forCellReuseIdentifier: Cells.postCell)
         tabelView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.photoCell)
         tabelView.register(MyLootsViewCell.self, forCellReuseIdentifier: Cells.labelCell)
         tabelView.register(LikesViewCell.self, forCellReuseIdentifier: Cells.likesCell)
