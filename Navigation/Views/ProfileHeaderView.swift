@@ -30,7 +30,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
     
-    private lazy var textField: UITextField = {
+    lazy var textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Waiting with something..."
         textField.adjustsFontSizeToFitWidth = true
@@ -45,7 +45,6 @@ class ProfileHeaderView: UIView {
         textField.keyboardType = .default
         textField.clearButtonMode = .always
         textField.layer.cornerRadius = 7
-//        textField.alpha = 0
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     } ()
@@ -77,17 +76,18 @@ class ProfileHeaderView: UIView {
     } ()
 
     @objc func buttonPressed() {
-        status.text = textField.text
-        status.textColor = .black
-        textField.text = ""
-        self.endEditing(true)
-        if self.status.hasText {
-            self.showButton.setTitle("Change Status", for: .normal)
+        guard let status = textField.text else {return}
+        if !status.isEmpty {
+            UIView.animate(withDuration: 0.3) {
+                self.status.text = self.textField.text
+                self.textField.text = .none
+            } completion: { _ in
+            }
         }
-    }
-    
-    @objc func tap(_ sender: Any) {
-        textField.resignFirstResponder()
+        if status.isEmpty {
+            textField.trigger()
+        }
+        endEditing(true)
     }
     
     private lazy var labelStackView: UIStackView = {
@@ -102,8 +102,8 @@ class ProfileHeaderView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 30
+        stackView.distribution = .fillEqually
+        stackView.spacing = 45
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -111,8 +111,6 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addConstraints()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-        self.addGestureRecognizer(tap)
     }
     
     required init?(coder: NSCoder) {

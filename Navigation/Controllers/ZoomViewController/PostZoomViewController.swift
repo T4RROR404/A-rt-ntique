@@ -1,13 +1,14 @@
 //
-//  PostView.swift
+//  PostZoomViewController.swift
 //  Navigation
 //
-//  Created by insomnia on 18.03.2022.
+//  Created by insomnia on 09.04.2022.
 //
 
 import UIKit
 
-class PostZoomView: UIView {
+
+class PostZoomViewController:UIViewController {
     
     private lazy var author: UILabel = {
         let author = UILabel()
@@ -37,6 +38,7 @@ class PostZoomView: UIView {
     
     private lazy var likes: UILabel = {
         let likes = UILabel()
+        likes.isUserInteractionEnabled = true
         likes.translatesAutoresizingMaskIntoConstraints = false
         return likes
     }()
@@ -60,31 +62,28 @@ class PostZoomView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.isUserInteractionEnabled = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    @objc func exitPress() {
-
-        UIView.animate(withDuration: 0.5) {
-            self.alpha = 0
-        }
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func viewDidLoad() {
+        view.backgroundColor = .white
         configureTableView()
-        self.backgroundColor = .white
-        self.alpha = 0
+        setupGesture()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    @objc func exitPress() {
+        
+        dismiss(animated: true)
     }
+    
+    private let tapGestureRecognizer = UITapGestureRecognizer()
     
     func set(post: PostView) {
         author.text = post.author
-        image.image = post.imageName
+        image.image = UIImage(named: post.imageName)
         descriptionV.text = post.description
         likes.text = "\(post.price) ♡"
         views.text = "\(post.views) ▷"
@@ -94,37 +93,55 @@ class PostZoomView: UIView {
         
         var constraints = [NSLayoutConstraint]()
         
-        self.addSubview(exitButton)
-        self.addSubview(author)
-        self.addSubview(image)
-        self.addSubview(descriptionV)
-        self.addSubview(stackView)
+        view.addSubview(exitButton)
+        view.addSubview(author)
+        view.addSubview(image)
+        view.addSubview(descriptionV)
+        view.addSubview(stackView)
         stackView.addArrangedSubview(likes)
         stackView.addArrangedSubview(views)
         
-        constraints.append(exitButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
-        constraints.append(exitButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30))
+        constraints.append(exitButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10))
+        constraints.append(exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30))
         constraints.append(exitButton.heightAnchor.constraint(equalToConstant: 30))
         constraints.append(exitButton.widthAnchor.constraint(equalToConstant: 30))
         
         constraints.append(author.topAnchor.constraint(equalTo: exitButton.bottomAnchor, constant: 10))
-        constraints.append(author.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
-        constraints.append(author.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
+        constraints.append(author.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10))
+        constraints.append(author.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10))
         constraints.append(author.bottomAnchor.constraint(equalTo: image.topAnchor, constant: -10))
         
-        constraints.append(image.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
-        constraints.append(image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
+        constraints.append(image.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10))
+        constraints.append(image.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10))
         constraints.append(image.heightAnchor.constraint(lessThanOrEqualToConstant: 350))
         
         constraints.append(descriptionV.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10))
-        constraints.append(descriptionV.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
-        constraints.append(descriptionV.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
+        constraints.append(descriptionV.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10))
+        constraints.append(descriptionV.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10))
         constraints.append(descriptionV.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20))
         
-        constraints.append(stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10))
-        constraints.append(stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10))
-        constraints.append(stackView.bottomAnchor.constraint(lessThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20))
+        constraints.append(stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10))
+        constraints.append(stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10))
+        constraints.append(stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20))
                 
         NSLayoutConstraint.activate(constraints)
     }
+    
+    private func setupGesture() {
+        self.tapGestureRecognizer.addTarget(self, action: #selector(self.tapLiked(_ :)))
+        self.likes.addGestureRecognizer(self.tapGestureRecognizer)
+    }
+    
+    @objc func tapLiked(_ gestureRecognizer: UITapGestureRecognizer) {
+        
+        let profileCOntroller = ProfileViewController()
+        var posts: [PostView] = []
+        posts = profileCOntroller.fetchData()
+        for i in 0...posts.count - 4 {
+            posts[i].price += 1
+            likes.text = "\(posts[i].price) ♡ "
+            
+        }
+    }
 }
+

@@ -10,7 +10,6 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let profileView = ProfileHeaderView()
-    let postView = PostZoomView()
     let avatarView = AvatarZoomView()
     
     override func viewDidLoad() {
@@ -19,16 +18,22 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = false
         setupConstraints()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        profileView.addGestureRecognizer(tap)
         let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
         profileView.avatarImage.addGestureRecognizer(avatarTap)
     }
     
-    private lazy var tabelView: UITableView = {
+    @objc func tap(_ sender: Any) {
+        profileView.textField.resignFirstResponder()
+    }
+    
+    lazy var tabelView: UITableView = {
         let tabelView = UITableView(frame: .zero, style: .grouped)
         tabelView.delegate = self
         tabelView.dataSource = self
         tabelView.layer.cornerRadius = 10
-        tabelView.register(PostHeaderViewCell.self, forCellReuseIdentifier: Cells.postCell)
+        tabelView.register(PostTableViewCell.self, forCellReuseIdentifier: Cells.postCell)
         tabelView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Cells.photoCell)
         tabelView.register(MyLootsViewCell.self, forCellReuseIdentifier: Cells.labelCell)
         tabelView.register(LikesViewCell.self, forCellReuseIdentifier: Cells.likesCell)
@@ -59,19 +64,11 @@ class ProfileViewController: UIViewController {
         
         posts = fetchData()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
-        postView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tabelView)
         view.addSubview(avatarView)
-        view.addSubview(postView)
     
         var constraints = [NSLayoutConstraint]()
-        
-        constraints.append(postView.topAnchor.constraint(equalTo: view.topAnchor))
-        constraints.append(postView.rightAnchor.constraint(equalTo: view.rightAnchor))
-        constraints.append(postView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
-        constraints.append(postView.leftAnchor.constraint(equalTo: view.leftAnchor))
-        constraints.append(postView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
         constraints.append(avatarView.topAnchor.constraint(equalTo: view.topAnchor))
         constraints.append(avatarView.rightAnchor.constraint(equalTo: view.rightAnchor))
