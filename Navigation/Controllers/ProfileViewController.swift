@@ -7,26 +7,11 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, TapLikedDelegate {
     
     let profileView = ProfileHeaderView()
     let avatarView = AvatarZoomView()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Profile"
-        view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = false
-        setupConstraints()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-        profileView.addGestureRecognizer(tap)
-        let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
-        profileView.avatarImage.addGestureRecognizer(avatarTap)
-    }
-    
-    @objc func tap(_ sender: Any) {
-        profileView.textField.resignFirstResponder()
-    }
+    var liked: Bool = false
     
     lazy var tabelView: UITableView = {
         let tabelView = UITableView(frame: .zero, style: .grouped)
@@ -41,6 +26,38 @@ class ProfileViewController: UIViewController {
         return tabelView
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Profile"
+        view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = false
+        setupConstraints()
+        dataSource = fetchData()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
+        profileView.addGestureRecognizer(tap)
+        let avatarTap = UITapGestureRecognizer(target: self, action: #selector(onTapScreen))
+        profileView.avatarImage.addGestureRecognizer(avatarTap)
+    }
+    
+    @objc func tap(_ sender: Any) {
+        profileView.textField.resignFirstResponder()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabelView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+   //     tableView.reloadData()
+    }
+    
+    func tapLikedLabel() {
+        liked.toggle()
+        self.tabelView.reloadData()
+    }
+    
     @objc func onTapScreen() {
         
         UIView.animate(withDuration: 0.5) {
@@ -48,7 +65,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    var posts: [PostView] = []
     var photos = PhotoView(photoName1: Photos.photo1!, photoName2: Photos.photo2!, photoName3: Photos.photo3!, photoName4: Photos.photo4!)
     var label = FavouritesView(favourites: "My Loots:")
     var likeLabel = myLikesView(myLikes: "My Likes:")
@@ -62,7 +78,6 @@ class ProfileViewController: UIViewController {
      
     private func setupConstraints() {
         
-        posts = fetchData()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tabelView)
