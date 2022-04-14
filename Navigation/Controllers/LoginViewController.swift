@@ -9,15 +9,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        addConstraint()
-        self.navigationController?.isNavigationBarHidden = true
-//        self.tabBarController?.tabBar.isHidden = true
-
-    }
-    
     private let scrollFieldView: UIScrollView = {
         let scrollFieldView = UIScrollView()
         scrollFieldView.translatesAutoresizingMaskIntoConstraints = false
@@ -102,6 +93,14 @@ class LoginViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        addConstraint()
+        self.navigationController?.isNavigationBarHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
+    }
     
     private lazy var validationData = ValidationData()
     

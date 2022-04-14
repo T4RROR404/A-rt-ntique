@@ -38,7 +38,6 @@ class PostZoomViewController:UIViewController {
     
     private lazy var likes: UILabel = {
         let likes = UILabel()
-        likes.isUserInteractionEnabled = true
         likes.translatesAutoresizingMaskIntoConstraints = false
         return likes
     }()
@@ -63,7 +62,6 @@ class PostZoomViewController:UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
-        stackView.isUserInteractionEnabled = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -71,7 +69,6 @@ class PostZoomViewController:UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .white
         configureTableView()
-        setupGesture()
     }
     
     @objc func exitPress() {
@@ -85,7 +82,7 @@ class PostZoomViewController:UIViewController {
         author.text = post.author
         image.image = UIImage(named: post.imageName)
         descriptionV.text = post.description
-        likes.text = "\(post.price) ♡"
+        likes.text = "\(post.likes) ♡"
         views.text = "\(post.views) ▷"
     }
     
@@ -125,23 +122,6 @@ class PostZoomViewController:UIViewController {
         constraints.append(stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20))
                 
         NSLayoutConstraint.activate(constraints)
-    }
-    
-    private func setupGesture() {
-        self.tapGestureRecognizer.addTarget(self, action: #selector(self.tapLiked(_ :)))
-        self.likes.addGestureRecognizer(self.tapGestureRecognizer)
-    }
-    
-    @objc func tapLiked(_ gestureRecognizer: UITapGestureRecognizer) {
-        
-        let profileCOntroller = ProfileViewController()
-        var posts: [PostView] = []
-        posts = profileCOntroller.fetchData()
-        for i in 0...posts.count - 4 {
-            posts[i].price += 1
-            likes.text = "\(posts[i].price) ♡ "
-            
-        }
     }
 }
 
