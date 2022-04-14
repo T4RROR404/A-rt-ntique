@@ -43,3 +43,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+struct PhotosView {
+
+    let imageName:String
+}

@@ -9,17 +9,6 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addConstraints()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
-        self.addGestureRecognizer(tap)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
     private lazy var name: UILabel = {
         let name = UILabel()
         name.text = "K1LL B1LL"
@@ -41,7 +30,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
     
-    private lazy var textField: UITextField = {
+    lazy var textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Waiting with something..."
         textField.adjustsFontSizeToFitWidth = true
@@ -56,7 +45,6 @@ class ProfileHeaderView: UIView {
         textField.keyboardType = .default
         textField.clearButtonMode = .always
         textField.layer.cornerRadius = 7
-//        textField.alpha = 0
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     } ()
@@ -74,15 +62,6 @@ class ProfileHeaderView: UIView {
         showButton.translatesAutoresizingMaskIntoConstraints = false
         return showButton
     }()
-    
-//    private lazy var newButton: UIButton = {
-//        let newButton = UIButton()
-//        newButton.setTitle("edit profile", for: .normal)
-//        newButton.backgroundColor = .gray
-//        newButton.layer.cornerRadius = 7
-//        newButton.translatesAutoresizingMaskIntoConstraints = false
-//        return newButton
-//    }()
 
     lazy var avatarImage: UIImageView = {
         let portrait = UIImage(named: "portrait")
@@ -97,23 +76,18 @@ class ProfileHeaderView: UIView {
     } ()
 
     @objc func buttonPressed() {
-        status.text = textField.text
-        status.textColor = .black
-        textField.text = ""
-        //        UIView.animate(withDuration: 1.0) {
-        //            self.showButton.frame = CGRect(x: 188, y: 180, width: 160, height: 50)
-        //            self.textField.alpha = 1
-        self.endEditing(true)
-        if self.status.hasText {
-            self.showButton.setTitle("Change Status", for: .normal)
-            //                self.textField.alpha = 0
-            //                self.showButton.frame = CGRect(x: 188, y: 120, width: 160, height: 50)
+        guard let status = textField.text else {return}
+        if !status.isEmpty {
+            UIView.animate(withDuration: 0.3) {
+                self.status.text = self.textField.text
+                self.textField.text = .none
+            } completion: { _ in
+            }
         }
-        //        }
-    }
-    
-    @objc func tap(_ sender: Any) {
-        textField.resignFirstResponder()
+        if status.isEmpty {
+            textField.trigger()
+        }
+        endEditing(true)
     }
     
     private lazy var labelStackView: UIStackView = {
@@ -124,11 +98,30 @@ class ProfileHeaderView: UIView {
         labelstackView.translatesAutoresizingMaskIntoConstraints = false
         return labelstackView
     }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 45
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 
     private func addConstraints() {
         
-        self.addSubview(avatarImage)
-        self.addSubview(labelStackView)
+        self.addSubview(stackView)
+        stackView.addArrangedSubview(avatarImage)
+        stackView.addArrangedSubview(labelStackView)
         labelStackView.addArrangedSubview(name)
         labelStackView.addArrangedSubview(status)
         labelStackView.addArrangedSubview(textField)
@@ -136,22 +129,11 @@ class ProfileHeaderView: UIView {
         
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(avatarImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
-        constraints.append(avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
-        constraints.append(avatarImage.trailingAnchor.constraint(lessThanOrEqualTo: labelStackView.leadingAnchor, constant: -25))
-        constraints.append(avatarImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25))
-        
-        constraints.append(labelStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20))
-        constraints.append(labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50))
-//        constraints.append(labelStackView.widthAnchor.constraint(equalToConstant: 180))
-        constraints.append(labelStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25))
-        
-        for _ in self.labelStackView.arrangedSubviews {
-
-            NSLayoutConstraint.activate([
-                textField.widthAnchor.constraint(equalToConstant: 170)
-            ])
-        }
+        constraints.append(stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor))
+        constraints.append(stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10))
+        constraints.append(stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
+        constraints.append(stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
+        constraints.append(stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -25))
 
         NSLayoutConstraint.activate(constraints)
     }

@@ -61,18 +61,17 @@ class PhotosTableViewCell: UITableViewCell {
         photoStackView.addArrangedSubview(photoTable4)
         
         constraints.append(photoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20))
-        constraints.append(photoStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
-        constraints.append(photoStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
-        constraints.append(photoStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20))
-                
-        NSLayoutConstraint.activate(constraints)
+        constraints.append(photoStackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20))
+        constraints.append(photoStackView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20))
+        constraints.append(photoStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -20))
+        constraints.append(photoStackView.centerXAnchor.constraint(equalTo: centerXAnchor))
         
         for views in photoStackView.arrangedSubviews {
-            views.heightAnchor.constraint(equalToConstant: 66).isActive = true
-            views.widthAnchor.constraint(equalToConstant: 70).isActive = true
-            views.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            constraints.append(views.heightAnchor.constraint(equalToConstant: 66))
+            constraints.append(views.widthAnchor.constraint(lessThanOrEqualToConstant: 70))
         }
         
+        NSLayoutConstraint.activate(constraints)        
     }
     
     func set4photo(photo: PhotoView) {

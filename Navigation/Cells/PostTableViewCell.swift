@@ -7,9 +7,29 @@
 
 import UIKit
 
-class PostHeaderViewCell: UITableViewCell {
+class PostTableViewCell: UITableViewCell {
     
-    private lazy var authorPost: UILabel = {
+    var likedDelegate: TapLikedDelegate?
+    
+    struct ViewModel {
+        let author: String
+        let image: String
+        let description: String
+        var likes: Int
+        var views: Int
+    }
+    
+    private lazy var backView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.maskedCorners = [
+            .layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var authorPost: UILabel = {
         let authorPost = UILabel()
         authorPost.numberOfLines = 0
         authorPost.font = .systemFont(ofSize: 20, weight: .bold)
@@ -20,34 +40,46 @@ class PostHeaderViewCell: UITableViewCell {
         return authorPost
     }()
     
-    private lazy var imagePost: UIImageView = {
+    lazy var imagePost: UIImageView = {
         let imagePost = UIImageView()
         imagePost.translatesAutoresizingMaskIntoConstraints = false
         return imagePost
     }()
     
-    private lazy var descriptionPost: UILabel = {
+    lazy var descriptionPost: UILabel = {
         let descriptionPost = UILabel()
         descriptionPost.font = .systemFont(ofSize: 12, weight: .light)
-        descriptionPost.numberOfLines = 10
+        descriptionPost.numberOfLines = 2
         descriptionPost.textAlignment = .center
         descriptionPost.translatesAutoresizingMaskIntoConstraints = false
         return descriptionPost
     }()
     
-    private lazy var likesPost: UILabel = {
+    lazy var likesPost: UILabel = {
         let likesPost = UILabel()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapLiked))
+        likesPost.addGestureRecognizer(tap)
+        likesPost.isUserInteractionEnabled = true
         likesPost.translatesAutoresizingMaskIntoConstraints = false
         return likesPost
     }()
     
-    private lazy var viewsPost: UILabel = {
+    lazy var viewsPost: UILabel = {
         let viewsPost = UILabel()
+        viewsPost.textAlignment = .right
         viewsPost.translatesAutoresizingMaskIntoConstraints = false
         return viewsPost
     }()
-
-    private lazy var stackView: UIStackView = {
+    
+    lazy var labelStackView: UIStackView = {
+        let labelStackView = UIStackView()
+        labelStackView.axis = .horizontal
+        labelStackView.distribution = .fillEqually
+        labelStackView.translatesAutoresizingMaskIntoConstraints = false
+        return labelStackView
+    }()
+    
+    lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -65,52 +97,59 @@ class PostHeaderViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(post: PostView) {
-        authorPost.text = post.author
-        imagePost.image = post.imageName
-        descriptionPost.text = post.description
-        likesPost.text = "\(post.views) Views                                           \(post.price) $"
-//        viewsPost.text = "\(post.views) Views"
+    func setup(with viewModel: ViewModel) {
+        self.authorPost.text = viewModel.author
+        self.imagePost.image = UIImage(named: viewModel.image)
+        self.descriptionPost.text = viewModel.description
+        self.likesPost.text = "\(viewModel.likes) ♡"
+        self.viewsPost.text = "\(viewModel.views) ▷"
+    }
+    
+    @objc func tapLiked() {
+        likedDelegate?.tapLikedLabel()
     }
     
     private func configureTableView() {
         
-        var constraints = [NSLayoutConstraint]()
-        
-        addSubview(stackView)
+        contentView.addSubview(backView)
+        backView.addSubview(stackView)
         stackView.addArrangedSubview(authorPost)
         stackView.addArrangedSubview(imagePost)
         stackView.addArrangedSubview(descriptionPost)
-        stackView.addArrangedSubview(likesPost)
-        stackView.addArrangedSubview(viewsPost)
+        stackView.addArrangedSubview(labelStackView)
+        labelStackView.addArrangedSubview(likesPost)
+        labelStackView.addArrangedSubview(viewsPost)
         
-//        constraints.append(stackView.centerYAnchor.constraint(equalTo: centerYAnchor))
-        constraints.append(stackView.centerXAnchor.constraint(equalTo: centerXAnchor))
-        constraints.append(stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10))
-        constraints.append(stackView.bottomAnchor.constraint(equalTo: bottomAnchor))
-        constraints.append(stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
-        constraints.append(stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
-        constraints.append(imagePost.heightAnchor.constraint(equalToConstant: 350))
-        
-        for views in stackView.arrangedSubviews {
-            views.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
-        }
-                
-        NSLayoutConstraint.activate(constraints)
+        NSLayoutConstraint.activate([
+            backView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            imagePost.heightAnchor.constraint(equalToConstant: 350),
+            
+            stackView.topAnchor.constraint(equalTo: backView.topAnchor, constant: 5),
+            stackView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -5),
+            
+            likesPost.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            viewsPost.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            authorPost.centerXAnchor.constraint(equalTo: stackView.centerXAnchor)
+        ])
     }
 }
 
-struct PostView {
+var dataSource: [PostView] = []
+
+struct PostView: Equatable {
     let author: String
     let description: String
-    let imageName:UIImage
-    let price: Int
-    let views: Int
+    let imageName: String
+    var likes: Int
+    var views: Int
 }
 
-struct Images {
-    static let cryptoPunk = UIImage(named: "cryptoPunk")
-    static let verona = UIImage(named: "verona1909")
-    static let watch = UIImage(named: "watch")
-    static let portraitsGays = UIImage(named: "portraitsGays")
+protocol TapLikedDelegate: AnyObject {
+    func tapLikedLabel()
 }
